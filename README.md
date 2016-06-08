@@ -4,12 +4,12 @@ If you have any question, it means you don't need to be here. For the time being
 
 ## Usage
 
-No usage is permitted. Go away.
+No usage is possible. Go away. Play with your own sandbox.
 
 ### build
 
-crystal build --release src/anyquestion.cr
-./anyquestion
+    crystal build --release src/anyquestion.cr
+    ./anyquestion
 
 ## Development
 
@@ -17,7 +17,6 @@ crystal build --release src/anyquestion.cr
 - http://kemalcr.com/
 
     shards install
-
 
 ## Contributing
 
