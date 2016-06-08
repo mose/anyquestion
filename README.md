@@ -21,12 +21,8 @@ crystal build --release src/anyquestion.cr
 
 ## Contributing
 
-1. Fork it ( https://github.com/[your-github-name]/anyquestion/fork )
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create a new Pull Request
+- fork it, twist it, learn from it, and throw it away.
 
 ## Contributors
 
-- [[your-github-name]](https://github.com/[your-github-name]) mose - creator, maintainer
+- [mose](https://github.com/mose) - playful principal culprit
