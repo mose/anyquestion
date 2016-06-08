@@ -12,7 +12,7 @@ No usage is possible. Go away. Play with your own sandbox.
     shards install
 
     # dev
-    crystal run src/anyquestion.cr
+    crystal src/anyquestion.cr
 
     # prod
     crystal build --release src/anyquestion.cr

@@ -17,6 +17,10 @@ end
 post "/room" do |env|
   # create a new room object
   # add the room in the registry
+  render "views/room.ecr"
+end
+
+get "/room" do |env|
 end
 
 ws "/room" do |socket|
