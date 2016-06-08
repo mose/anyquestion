@@ -1,0 +1,12 @@
+name: anyquestion
+version: 0.1.0
+
+authors:
+  - mose <mose@mose.com>
+
+dependencies:
+  kemal:
+    github: sdogruyol/kemal
+    branch: master
+
+license: MIT
