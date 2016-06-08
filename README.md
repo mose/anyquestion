@@ -2,21 +2,17 @@
 
 If you have any question, it means you don't need to be here. For the time being.
 
+- http://crystal-lang.org/docs/installation/index.html
+- http://kemalcr.com/
+
 ## Usage
 
 No usage is possible. Go away. Play with your own sandbox.
 
-### build
+    shards install
 
     crystal build --release src/anyquestion.cr
     ./anyquestion
-
-## Development
-
-- http://crystal-lang.org/docs/installation/index.html
-- http://kemalcr.com/
-
-    shards install
 
 ## Contributing
 
