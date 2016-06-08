@@ -1,7 +1,25 @@
 body {
   background-color: #222;
   color: #ddd;
+  font-family: sans serif;
 }
 a {
   color: #adf;
+  text-decoration: none;
+}
+#menu {
+  padding: 20px;
+}
+#menu a {
+  padding: 5px 10px;
+  font-size: 1.4em;
+  color: #000;
+  background-color: #666;
+}
+#menu a:hover {
+  color: #fff;
+  background-color: #000;
+}
+#meat {
+  padding: 10px 30px;
 }
