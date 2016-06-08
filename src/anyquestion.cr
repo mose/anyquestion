@@ -1,7 +1,7 @@
 require "kemal"
 require "./anyquestion/*"
 
-$register = Anyquestion::Register.new
+$registry = Anyquestion::Registry.new
 
 messages = [] of String
 sockets = [] of HTTP::WebSocket
@@ -10,11 +10,16 @@ get "/" do |env|
   render "views/home.ecr", "views/layout.ecr"
 end
 
-get "/register" do
-  render "views/register.ecr", "views/layout.ecr"
+get "/registry" do
+  render "views/registry.ecr", "views/layout.ecr"
 end
 
-ws "/" do |socket|
+post "/room" do |env|
+  # create a new room object
+  # add the room in the registry
+end
+
+ws "/room" do |socket|
   sockets.push socket
 
   socket.on_message do |message|

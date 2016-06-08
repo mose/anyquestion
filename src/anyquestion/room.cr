@@ -1,6 +1,8 @@
 module Anyquestion
   class Room
-    def initialize
+    def initialize(name : String)
+      @name = name
+      @date_start = ""
     end
   end
 end
