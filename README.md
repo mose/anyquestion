@@ -1,22 +1,23 @@
 # anyquestion
 
-TODO: Write a description here
-
-## Installation
-
-
-TODO: Write installation instructions here
-
+If you have any question, it means you don't need to be here. For the time being.
 
 ## Usage
 
+No usage is permitted. Go away.
 
+### build
 
-TODO: Write usage instructions here
+crystal build --release src/anyquestion.cr
+./anyquestion
 
 ## Development
 
-TODO: Write development instructions here
+- http://crystal-lang.org/docs/installation/index.html
+- http://kemalcr.com/
+
+    shards install
+
 
 ## Contributing
 
