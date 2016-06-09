@@ -1,16 +1,16 @@
 module Anyquestion
   class Registry
-    @rooms = [] of Room
+    @rooms = {} of Int32 => Room
 
     def add(room : Room)
       # TODO check if rooms already exists
-      unless @rooms.includes? room
-        @rooms << room
+      unless @rooms[room.id]?
+        @rooms[room.id] = room
       end
     end
 
     def remove(room : Room)
-      @rooms.delete room
+      @rooms.delete room.id
     end
   end
 end

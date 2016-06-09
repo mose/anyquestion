@@ -18,11 +18,16 @@ post "/room" do |env|
   # create a new room object
   # add the room in the registry
   name = env.params.body["name"]
-  registry.add Anyquestion::Room.new(name)
+  newroom = Anyquestion::Room.new(name)
+  pp newroom
+  # registry.add newroom
   render "views/room.ecr"
 end
 
-get "/room" do |env|
+get "/room/:id" do |env|
+  name = env.params.url["id"]
+  pp name
+  render "views/room.ecr"
 end
 
 ws "/room" do |socket|
