@@ -10,9 +10,8 @@ get "/" do |env|
   render "views/home.ecr", "views/layout.ecr"
 end
 
-get "/registry" do
-  pp registry
-  render "views/registry.ecr", "views/layout.ecr"
+get "/help" do
+  render "views/help.ecr", "views/layout.ecr"
 end
 
 post "/room" do |env|

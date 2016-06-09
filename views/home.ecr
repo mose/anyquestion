@@ -1,7 +1,19 @@
 <h1>Any Question?</h1>
 
 <form action="/room" method="post">
-Create a new room in the Registry, with name:
+New room 
 <input type="text" name="name">
 <input type="submit" name="submit" value="Create">
 </form>
+
+<h2>Rooms</h2>
+<% if registry.rooms.empty? %>
+  No room created yet.
+<% else %>
+  <% registry.rooms.each do |i,room| %>
+  <div class="registry">
+  <span><%= room.time_start %></span>
+  <a href="/room/<%= room.id %>"><%= room.name %></a>
+  </div>
+  <% end %>
+<% end %>
