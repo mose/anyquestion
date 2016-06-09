@@ -16,14 +16,9 @@ get "/registry" do
 end
 
 post "/room" do |env|
-  # create a new room object
-  # add the room in the registry
   name = env.params.body["name"]
-  newroom = Anyquestion::Room.new(name)
-  registry.add newroom
-  pp newroom
-  pp registry
-  # registry.add newroom
+  room = Anyquestion::Room.new(name)
+  registry.add room
   render "views/room.ecr"
 end
 
