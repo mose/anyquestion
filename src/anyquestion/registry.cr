@@ -1,17 +1,16 @@
 module Anyquestion
   class Registry
-    def initialize
-      @date_start = ""
-      @rooms = [] of Room
-    end
+    @rooms = [] of Room
 
     def add(room : Room)
       # TODO check if rooms already exists
-      @rooms << room
+      unless @rooms.includes? room
+        @rooms << room
+      end
     end
 
-    def drop(room : Room)
-      # TODO remove room from list of rooms
+    def remove(room : Room)
+      @rooms.delete room
     end
   end
 end

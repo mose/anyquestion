@@ -17,6 +17,7 @@ end
 post "/room" do |env|
   # create a new room object
   # add the room in the registry
+  name = env.params.body["name"]
   render "views/room.ecr"
 end
 

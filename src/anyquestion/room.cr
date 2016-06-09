@@ -1,8 +1,9 @@
 module Anyquestion
   class Room
+    @time_start = Time.now
+
     def initialize(name : String)
       @name = name
-      @date_start = ""
     end
   end
 end

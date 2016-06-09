@@ -18,6 +18,11 @@ No usage is possible. Go away. Play with your own sandbox.
     crystal build --release src/anyquestion.cr
     ./anyquestion -e production
 
+## dev links
+
+- http://crystal-lang.org/docs
+- http://crystal-lang.org/api
+
 ## Contributing
 
 - fork it, twist it, learn from it, and throw it away.
