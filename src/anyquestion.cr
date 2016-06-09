@@ -28,9 +28,17 @@ post "/room" do |env|
 end
 
 get "/room/:id" do |env|
-  name = env.params.url["id"]
-  pp name
-  render "views/room.ecr"
+  id = env.params.url["id"].to_i
+  pp id
+  pp registry.rooms
+  if registry.rooms[id]?
+    room = registry.rooms[id]
+    pp room
+    render "views/room.ecr"
+  else
+    flash = "Unknown room"
+    env.response.status_code = 404
+  end
 end
 
 ws "/room" do |socket|
@@ -50,6 +58,10 @@ ws "/room" do |socket|
   socket.on_close do |socket|
     sockets.delete socket
   end
+end
+
+error 404 do
+  render "views/404.ecr", "views/layout.ecr"
 end
 
 Kemal.run
