@@ -1,7 +1,7 @@
 require "kemal"
 require "./anyquestion/*"
 
-$registry = Anyquestion::Registry.new
+registry = Anyquestion::Registry.new
 
 messages = [] of String
 sockets = [] of HTTP::WebSocket
@@ -18,6 +18,7 @@ post "/room" do |env|
   # create a new room object
   # add the room in the registry
   name = env.params.body["name"]
+  $registry.add Anyquestion::Room.new(name)
   render "views/room.ecr"
 end
 
