@@ -1,6 +1,7 @@
 module Anyquestion
   class Registry
     @rooms = {} of Int32 => Room
+    getter :rooms
 
     def add(room : Room)
       # TODO check if rooms already exists

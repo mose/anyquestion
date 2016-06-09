@@ -5,6 +5,8 @@ module Anyquestion
     @time_start : Time
 
     getter :id
+    getter :name
+    getter :time_start
 
     def initialize(name)
       @name = name
@@ -12,6 +14,14 @@ module Anyquestion
       @id = @time_start.to_s("%s").to_i
       @messages = [] of String
       @sockets = [] of HTTP::WebSocket
+    end
+
+    def nb_messages
+      @messages.count
+    end
+
+    def nb_users
+      @sockets.count
     end
   end
 end

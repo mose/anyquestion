@@ -11,6 +11,7 @@ get "/" do |env|
 end
 
 get "/registry" do
+  pp registry
   render "views/registry.ecr", "views/layout.ecr"
 end
 
@@ -19,7 +20,9 @@ post "/room" do |env|
   # add the room in the registry
   name = env.params.body["name"]
   newroom = Anyquestion::Room.new(name)
+  registry.add newroom
   pp newroom
+  pp registry
   # registry.add newroom
   render "views/room.ecr"
 end
