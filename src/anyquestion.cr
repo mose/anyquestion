@@ -22,7 +22,7 @@ post "/room" do |env|
   name = env.params.body["name"]
   room = Anyquestion::Room.new(name)
   registry.add room
-  render "views/room.ecr"
+  env.redirect "/room/#{room.id}"
 end
 
 get "/room/:id" do |env|
@@ -39,16 +39,19 @@ get "/room/:id" do |env|
   end
 end
 
-ws "/room/:id" do |socket, env|
+ws "/:id" do |socket, env|
   begin
     id = env.params.url["id"].to_i
+    pp id
     if registry.rooms[id]?
       room = registry.rooms[id]
+      pp room
       room.handle socket
     else
       env.response.status_code = 404
     end
   rescue
+    pp env
     env.response.status_code = 404
   end
 end
