@@ -6,12 +6,16 @@ registry = Anyquestion::Registry.new
 messages = [] of String
 sockets = [] of HTTP::WebSocket
 
+macro in_layout(tpl)
+  render "views/#{{{tpl}}}.ecr", "views/layout.ecr"
+end
+
 get "/" do |env|
-  render "views/home.ecr", "views/layout.ecr"
+  in_layout "home"
 end
 
 get "/help" do
-  render "views/help.ecr", "views/layout.ecr"
+  in_layout "help"
 end
 
 post "/room" do |env|
@@ -22,15 +26,15 @@ post "/room" do |env|
 end
 
 get "/room/:id" do |env|
-  id = env.params.url["id"].to_i
-  pp id
-  pp registry.rooms
-  if registry.rooms[id]?
-    room = registry.rooms[id]
-    pp room
-    render "views/room.ecr"
-  else
-    flash = "Unknown room"
+  begin
+    id = env.params.url["id"].to_i
+    if registry.rooms[id]?
+      room = registry.rooms[id]
+      render "views/room.ecr"
+    else
+      env.response.status_code = 404
+    end
+  rescue
     env.response.status_code = 404
   end
 end
@@ -55,7 +59,7 @@ ws "/room" do |socket|
 end
 
 error 404 do
-  render "views/404.ecr", "views/layout.ecr"
+  in_layout "404"
 end
 
 Kemal.run

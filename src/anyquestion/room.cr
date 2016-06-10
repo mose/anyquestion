@@ -23,5 +23,24 @@ module Anyquestion
     def nb_users
       @sockets.size
     end
+
+    def handle(socket)
+      @sockets.push socket
+
+      socket.on_message do |message|
+        messages.push message
+        @sockets.each do |a_socket|
+          begin
+            a_socket.send messages.to_json
+          rescue ex
+            @sockets.delete a_socket
+          end
+        end
+      end
+
+      socket.on_close do |socket|
+        @sockets.delete socket
+      end
+    end
   end
 end
