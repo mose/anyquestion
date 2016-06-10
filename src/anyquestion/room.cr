@@ -13,6 +13,7 @@ module Anyquestion
       @time_start = Time.now
       @id = @time_start.to_s("%s").to_i
       @questions = {} of Int32 => Question
+      @messages = [] of String
       @sockets = [] of HTTP::WebSocket
     end
 
@@ -28,10 +29,10 @@ module Anyquestion
       @sockets.push socket
 
       socket.on_message do |message|
-        messages.push message
+        @messages.push message
         @sockets.each do |a_socket|
           begin
-            a_socket.send messages.to_json
+            a_socket.send @messages.to_json
           rescue ex
             @sockets.delete a_socket
           end
