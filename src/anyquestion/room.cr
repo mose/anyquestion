@@ -12,16 +12,16 @@ module Anyquestion
       @name = name
       @time_start = Time.now
       @id = @time_start.to_s("%s").to_i
-      @messages = [] of String
+      @questions = {} of Int32 => Question
       @sockets = [] of HTTP::WebSocket
     end
 
-    def nb_messages
-      @messages.count
+    def nb_questions
+      @questions.size
     end
 
     def nb_users
-      @sockets.count
+      @sockets.size
     end
   end
 end

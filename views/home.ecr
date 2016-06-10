@@ -12,8 +12,10 @@ New room
 <% else %>
   <% registry.rooms.each do |i,room| %>
   <div class="registry">
-  <span><%= room.time_start %></span>
-  <a href="/room/<%= room.id %>"><%= room.name %></a>
+  <span><a href="/room/<%= room.id %>"><%= room.id %></a></span>
+  <b><%= room.name %></b>
+  (<%=room.nb_users %> users)
+  (<%=room.nb_questions %> questions)
   </div>
   <% end %>
 <% end %>
