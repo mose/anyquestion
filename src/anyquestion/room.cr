@@ -26,7 +26,9 @@ module Anyquestion
     end
 
     def handle(socket)
-      @sockets.push socket
+      @sockets.push socket unless @sockets.includes? socket
+
+      socket.send @messages.to_json
 
       socket.on_message do |message|
         @messages.push message
