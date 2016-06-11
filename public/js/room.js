@@ -11,8 +11,8 @@ var Room = React.createClass({
     var self = this;
     this.sendable = true;
     var server = new WebSocket("ws://" + location.hostname + ":" + location.port + "/ws?room=" + location.pathname.split('/').reverse()[0]);
-    var user = localStorage.getItem('user') || Math.floor((Math.random() * 100000000) + 1);
-    localStorage.setItem('user', user);
+    var user = localStorage.getItem('aq_userid') || Math.floor((Math.random() * 100000000) + 1);
+    localStorage.setItem('aq_userid', user);
     server.onmessage = function (event) {
       var messages = JSON.parse(event.data);
       self.setState({messages: messages});
@@ -65,9 +65,9 @@ var Room = React.createClass({
     });
 
     return React.createElement("div", null,
-      React.createElement("ul", null, messages),
       React.createElement("input", { autofocus: true, placeholder: "write your message!", type: "text", ref: "message", onKeyUp: this.sendMessageWithEnter }),
-      React.createElement("button", { type: "button", onClick: this.sendMessage }, "Send")
+      React.createElement("button", { type: "button", onClick: this.sendMessage }, "Send"),
+      React.createElement("ul", null, messages)
     ); 
   }
 

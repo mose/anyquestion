@@ -32,11 +32,11 @@ module Anyquestion
 
       socket.on_message do |message|
         @messages.push message
-        @sockets.each do |a_socket|
+        @sockets.each do |s|
           begin
-            a_socket.send @messages.to_json
+            s.send @messages.to_json
           rescue ex
-            @sockets.delete a_socket
+            @sockets.delete s
           end
         end
       end
