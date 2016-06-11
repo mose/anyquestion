@@ -11,7 +11,6 @@ var Room = React.createClass({
     var self = this;
     this.sendable = true;
     var server = new WebSocket("ws://" + location.hostname + ":" + location.port + "/ws?room=" + location.pathname.split('/').reverse()[0]);
-    // var server = new WebSocket("ws://" + location.hostname + ":" + location.port + "/r/" + location.pathname.split('/').reverse()[0]);
     var user = localStorage.getItem('user') || random(1000, 2000);
     localStorage.setItem('user', user);
     server.onmessage = function (event) {

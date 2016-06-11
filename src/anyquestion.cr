@@ -40,13 +40,10 @@ get "/room/:id" do |env|
 end
 
 ws "/ws" do |socket, env|
-  pp env.params.query["room"]
   begin
     id = env.params.query["room"].to_i
-    pp id
     if registry.rooms[id]?
       room = registry.rooms[id]
-      pp room
       room.handle socket
     else
       env.response.status_code = 404
