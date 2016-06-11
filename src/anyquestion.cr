@@ -39,7 +39,8 @@ get "/room/:id" do |env|
   end
 end
 
-ws "/:id" do |socket, env|
+ws "/r/:something" do |socket, env|
+  pp env
   begin
     id = env.params.url["id"].to_i
     pp id
@@ -48,6 +49,7 @@ ws "/:id" do |socket, env|
       pp room
       room.handle socket
     else
+      pp env
       env.response.status_code = 404
     end
   rescue
