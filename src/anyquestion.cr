@@ -39,21 +39,19 @@ get "/room/:id" do |env|
   end
 end
 
-ws "/r/:something" do |socket, env|
-  pp env
+ws "/ws" do |socket, env|
+  pp env.params.query["room"]
   begin
-    id = env.params.url["id"].to_i
+    id = env.params.query["room"].to_i
     pp id
     if registry.rooms[id]?
       room = registry.rooms[id]
       pp room
       room.handle socket
     else
-      pp env
       env.response.status_code = 404
     end
   rescue
-    pp env
     env.response.status_code = 404
   end
 end
