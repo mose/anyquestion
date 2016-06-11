@@ -11,7 +11,7 @@ var Room = React.createClass({
     var self = this;
     this.sendable = true;
     var server = new WebSocket("ws://" + location.hostname + ":" + location.port + "/ws?room=" + location.pathname.split('/').reverse()[0]);
-    var user = localStorage.getItem('user') || random(1000, 2000);
+    var user = localStorage.getItem('user') || Math.floor((Math.random() * 100000000) + 1);
     localStorage.setItem('user', user);
     server.onmessage = function (event) {
       var messages = JSON.parse(event.data);
@@ -59,7 +59,7 @@ var Room = React.createClass({
       var color = user[1];
       var name = user[0];
       return React.createElement("li", null,
-        React.createElement('span', {style: {color: color}}, name+"["+setCurrentTime()+"]: "),
+        React.createElement('span', {style: {color: color}}, name+": "),
         React.createElement('span', null, parts.slice(1).join(":").trim())
       );
     });
