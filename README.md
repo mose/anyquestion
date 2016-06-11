@@ -27,6 +27,10 @@ No usage is possible. Go away. Play with your own sandbox.
 
 - fork it, twist it, learn from it, and throw it away.
 
+## Licemse
+
+Copyright (c) 2016 mose - MIT license
+
 ## Contributors
 
 - [mose](https://github.com/mose) - playful principal culprit
