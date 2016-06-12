@@ -3,9 +3,6 @@ require "./anyquestion/*"
 
 registry = Anyquestion::Registry.new
 
-messages = [] of String
-sockets = [] of HTTP::WebSocket
-
 macro in_layout(tpl)
   render "views/#{{{tpl}}}.ecr", "views/layout.ecr"
 end
