@@ -1,4 +1,4 @@
-# anyquestion
+# AnyQuestion
 
 This is a web app for managing the step "Do you have any question?" that happens at the end of a talk. It's inspired by a feature present in [Daskit](https://www.daskit.com/) which is not open source (yet?). Every talk has a room, people ask questions there and vote on other people questions. Then it gets easy for the speaker to select the question with the more weight.
 
@@ -29,7 +29,7 @@ Code is not finished yet. but you can launch with:
 
 - fork it, twist it, but don't submit PR yet, it's not finished.
 
-## Licemse
+## License
 
 Copyright (c) 2016 mose - MIT license
 
