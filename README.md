@@ -2,11 +2,6 @@
 
 This is a web app for managing the step "Do you have any question?" that happens at the end of a talk. It's inspired by a feature present in [Daskit](https://www.daskit.com/) which is not open source (yet?). Every talk has a room, people ask questions there and vote on other people questions. Then it gets easy for the speaker to select the question with the more weight.
 
-Some links
-
-- http://crystal-lang.org/docs/installation/index.html
-- http://kemalcr.com/
-
 ## Usage
 
 Code is not finished yet. but you can launch with:
@@ -25,6 +20,8 @@ Code is not finished yet. but you can launch with:
 
 ## dev links
 
+- http://crystal-lang.org/docs/installation/index.html
+- http://kemalcr.com/
 - http://crystal-lang.org/docs
 - http://crystal-lang.org/api
 
