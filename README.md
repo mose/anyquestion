@@ -20,6 +20,9 @@ Code is not finished yet. but you can launch with:
     crystal build --release src/anyquestion.cr
     ./anyquestion -e production
 
+    # deploy (embedding all libs for portability)
+    crystal build src/anyquestion.cr --release --link-flags "-static -L/opt/crystal/embedded/lib"
+
 ## dev links
 
 - http://crystal-lang.org/docs
