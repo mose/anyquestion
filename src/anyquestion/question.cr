@@ -8,5 +8,13 @@ module Anyquestion
       @name = name
       @voters = [] of Int32
     end
+
+    def votes
+      @voters.size
+    end
+
+    def vote(voter)
+      @voters.push voter unless @voters.includes? voter
+    end
   end
 end
