@@ -16,7 +16,6 @@ var Room = React.createClass({
     server.onmessage = function (event) {
       var messages = JSON.parse(event.data);
       self.setState({messages: messages});
-      window.scrollTo(0, document.body.scrollHeight);
       self.refs.message.focus();
     };
 

@@ -31,12 +31,17 @@ module Anyquestion
       socket.send @messages.to_json
 
       socket.on_message do |message|
-        @messages.push message
-        @sockets.each do |s|
-          begin
-            s.send @messages.to_json
-          rescue ex
-            @sockets.delete s
+        if /^[0-9]*::[0-9]*$/.match message
+        else
+          author, text = message.split(/::::/)
+          question = Question.new text, author
+          @messages.push message
+          @sockets.each do |s|
+            begin
+              s.send @messages.to_json
+            rescue ex
+              @sockets.delete s
+            end
           end
         end
       end

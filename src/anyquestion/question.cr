@@ -4,9 +4,11 @@ module Anyquestion
 
     getter :name
 
-    def initialize(name)
+    def initialize(name, author : Int32)
       @name = name
+      @id = Time.now.to_s("%s").to_i
       @voters = [] of Int32
+      @voters << author
     end
 
     def votes
