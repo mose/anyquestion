@@ -32,7 +32,7 @@ var Room = React.createClass({
     this.refs.message.focus();
   },
 
-  sendMessage: function () {
+  sendQuestion: function () {
     if (!this.sendable) {
       return false;
     }
@@ -40,32 +40,40 @@ var Room = React.createClass({
     setTimeout(function () {
       self.sendable = true; 
     }, 100);
-    this.server.send(this.user + ":" + this.refs.message.value);
+    this.server.send(this.user + "::::" + this.refs.message.value);
     this.refs.message.value = '';
     this.sendable = false;
   },
 
-  sendMessageWithEnter: function (e) {
+  sendQuestionWithEnter: function (e) {
     if (e.keyCode == 13) {
-     this.sendMessage(); 
+     this.sendQuestion(); 
     }
   },
 
   render: function () {
     var messages = this.state.messages.map(function (message) {
-      var parts = message.split(":");
-      var user = parts[0].split("@");
-      var color = user[1];
-      var name = user[0];
-      return React.createElement("li", null,
-        React.createElement('span', {style: {color: color}}, name+": "),
-        React.createElement('span', null, parts.slice(1).join(":").trim())
-      );
+      console.log(message);
+      // "question that is asked::::15687231,34257681,432675"
+      var parts = message.split("::::");
+      var question = parts[0];
+      var votes = parts[1].split(",");
+      if (votes.indexOf(user) > -1) {
+        return React.createElement("li", null,
+          React.createElement('span', { style: {color: color} }, votes.length),
+          React.createElement('span', null, question.trim())
+        );
+      } else {
+        return React.createElement("li", null,
+          React.createElement('span', { style: {color: color} }, votes.length),
+          React.createElement('span', null, question.trim())
+        );
+      }
     });
 
     return React.createElement("div", null,
-      React.createElement("input", { autofocus: true, placeholder: "write your message!", type: "text", ref: "message", onKeyUp: this.sendMessageWithEnter }),
-      React.createElement("button", { type: "button", onClick: this.sendMessage }, "Send"),
+      React.createElement("input", { autofocus: true, placeholder: "What is your question?", type: "text", ref: "message", onKeyUp: this.sendQuestionWithEnter }),
+      React.createElement("button", { type: "button", onClick: this.sendQuestion }, "Ask"),
       React.createElement("ul", null, messages)
     ); 
   }

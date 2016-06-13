@@ -1,8 +1,9 @@
 module Anyquestion
   class Question
+    @id : Int32
     @name : String
 
-    getter :name
+    getter :name, :id
 
     def initialize(name, author : Int32)
       @name = name

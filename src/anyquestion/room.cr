@@ -31,10 +31,13 @@ module Anyquestion
       socket.send @messages.to_json
 
       socket.on_message do |message|
-        if /^[0-9]*::[0-9]*$/.match message
+        parts = message.split(/----/)
+        if parts.size > 1
+          question, voter = parts
         else
           author, text = message.split(/::::/)
-          question = Question.new text, author
+          question = Question.new text, author.to_i
+          @questions[question.id] = question
           @messages.push message
           @sockets.each do |s|
             begin
