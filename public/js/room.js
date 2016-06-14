@@ -27,11 +27,11 @@ var Room = React.createClass({
       // console.log(event.data);
       var questions = JSON.parse(event.data);
       self.setState({questions: questions});
-      self.refs.message.focus();
+      self.refs.question.focus();
     };
     this.server = server;
     this.user = user;
-    this.refs.message.focus();
+    this.refs.question.focus();
   },
 
   sendQuestion: function () {
@@ -42,9 +42,14 @@ var Room = React.createClass({
     setTimeout(function () {
       self.sendable = true; 
     }, 100);
-    this.server.send(this.user + "::::" + this.refs.message.value);
-    this.refs.message.value = '';
+    this.server.send(this.user + "::::" + this.refs.question.value);
+    this.refs.question.value = '';
     this.sendable = false;
+  },
+
+  sendVote: function () {
+    var self = this;
+    this.server.send(this.user + "::::" + this.refs.message.value);
   },
 
   sendQuestionWithEnter: function (e) {
@@ -61,19 +66,19 @@ var Room = React.createClass({
       console.log(q.voters.contains(user));
       if (q.voters.includes(user)) {
         return React.createElement("li", null,
-          React.createElement('span', { className: "votable" }, q.voters.length),
+          React.createElement('span', { className: "voted" }, q.voters.length),
           React.createElement('span', { className: "q" }, q.name)
         );
       } else {
         return React.createElement("li", null,
-          React.createElement('span', { className: "voted" }, q.voters.length),
+          React.createElement('span', { className: "votable", onClick: this.sendVote }, q.voters.length),
           React.createElement('span', { className: "q" }, q.name)
         );
       }
     });
 
     return React.createElement("div", { className: "questions" },
-      React.createElement("input", { autofocus: true, placeholder: "What is your question?", type: "text", ref: "message", onKeyUp: this.sendQuestionWithEnter }),
+      React.createElement("input", { autofocus: true, placeholder: "What is your question?", type: "text", ref: "question", onKeyUp: this.sendQuestionWithEnter }),
       React.createElement("ul", null, questions)
     ); 
   }

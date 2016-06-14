@@ -27,7 +27,7 @@ a {
   font-family: monospace;
 }
 .questions {
-  border-top: 1px solid #fff;
+  margin-top: 10px;
 }
 .questions input, .question button {
   padding: 2px 5px;
@@ -40,7 +40,7 @@ a {
   padding: 0;
 }
 .questions ul li {
-  margin: 40px 0;
+  margin: 20px 0;
 }
 .questions ul li .voted {
   padding: 15px 20px;
@@ -54,5 +54,5 @@ a {
 .questions ul li .q {
   padding: 15px 20px;
   background-color: #111;
-  right: 0;
+  line-height: 3em;
 }
