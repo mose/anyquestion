@@ -1,21 +1,22 @@
 <h1>Any Question?</h1>
 
-<form action="/room" method="post">
+
+<h2>Rooms</h2>
+<form action="/room" method="post" class="newroom">
 New room 
 <input type="text" name="name">
 <input type="submit" name="submit" value="Create">
 </form>
-
-<h2>Rooms</h2>
 <% if registry.rooms.empty? %>
   No room created yet.
 <% else %>
   <% registry.rooms.each do |i,room| %>
   <div class="registry">
-  <span><a href="/room/<%= room.id %>"><%= room.id %></a></span>
-  <b><%= room.name %></b>
+  <b><a href="/room/<%= room.id %>"><%= room.name %></a></b>
+  <span class="smaller">
   (<%=room.nb_users %> users)
   (<%=room.nb_questions %> questions)
+  </span>
   </div>
   <% end %>
 <% end %>
