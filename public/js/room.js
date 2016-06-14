@@ -14,6 +14,7 @@ var Room = React.createClass({
     var user = localStorage.getItem('aq_userid') || Math.floor((Math.random() * 100000000) + 1);
     localStorage.setItem('aq_userid', user);
     server.onmessage = function (event) {
+      console.log(event.data);
       var messages = JSON.parse(event.data);
       self.setState({messages: messages});
       self.refs.message.focus();
@@ -52,28 +53,23 @@ var Room = React.createClass({
   },
 
   render: function () {
-    var messages = this.state.messages.map(function (message) {
-      console.log(message);
-      // "question that is asked::::15687231,34257681,432675"
-      var parts = message.split("::::");
-      var question = parts[0];
-      var votes = parts[1].split(",");
-      if (votes.indexOf(user) > -1) {
+    var messages = this.state.messages.map(function (q) {
+      console.log(q);
+      if (q.voters.indexOf(this.user) > -1) {
         return React.createElement("li", null,
-          React.createElement('span', { style: {color: color} }, votes.length),
-          React.createElement('span', null, question.trim())
+          React.createElement('span', { className: "votable" }, q.voters.length),
+          React.createElement('span', null, q.name)
         );
       } else {
         return React.createElement("li", null,
-          React.createElement('span', { style: {color: color} }, votes.length),
-          React.createElement('span', null, question.trim())
+          React.createElement('span', { className: "voted" }, q.voters.length),
+          React.createElement('span', null, q.name)
         );
       }
     });
 
-    return React.createElement("div", null,
+    return React.createElement("div", { className: "questions" },
       React.createElement("input", { autofocus: true, placeholder: "What is your question?", type: "text", ref: "message", onKeyUp: this.sendQuestionWithEnter }),
-      React.createElement("button", { type: "button", onClick: this.sendQuestion }, "Ask"),
       React.createElement("ul", null, messages)
     ); 
   }

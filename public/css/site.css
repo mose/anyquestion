@@ -26,3 +26,11 @@ a {
 .registry span {
   font-family: monospace;
 }
+.questions {
+  border-top: 1px solid #fff;
+}
+.questions input, .question button {
+  padding: 2px 5px;
+  font-size: 2em;
+  width: 100%;
+}

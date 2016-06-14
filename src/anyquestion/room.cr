@@ -13,7 +13,6 @@ module Anyquestion
       @time_start = Time.now
       @id = @time_start.to_s("%s").to_i
       @questions = {} of Int32 => Question
-      @messages = [] of String
       @sockets = [] of HTTP::WebSocket
     end
 
@@ -28,7 +27,7 @@ module Anyquestion
     def handle(socket)
       @sockets.push socket unless @sockets.includes? socket
 
-      socket.send @messages.to_json
+      socket.send @questions.values.to_json
 
       socket.on_message do |message|
         parts = message.split(/----/)
@@ -38,10 +37,9 @@ module Anyquestion
           author, text = message.split(/::::/)
           question = Question.new text, author.to_i
           @questions[question.id] = question
-          @messages.push message
           @sockets.each do |s|
             begin
-              s.send @messages.to_json
+              s.send @questions.values.to_json
             rescue ex
               @sockets.delete s
             end
