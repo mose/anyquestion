@@ -15,7 +15,7 @@ module Anyquestion
 
     def initialize(name, author : Int32)
       @name = name
-      @id = Time.now.to_s("%s").to_i
+      @id = Time.now.to_s("%s").to_i + Random.new.rand(1000)
       @voters = [] of Int32
       @voters << author
     end

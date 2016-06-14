@@ -11,7 +11,7 @@ module Anyquestion
     def initialize(name)
       @name = name
       @time_start = Time.now
-      @id = @time_start.to_s("%s").to_i
+      @id = @time_start.to_s("%s").to_i + Random.new.rand(1000)
       @questions = {} of Int32 => Question
       @sockets = [] of HTTP::WebSocket
     end
