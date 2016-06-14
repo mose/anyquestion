@@ -1,9 +1,19 @@
+Array.prototype.contains = function(obj) {
+  var i = this.length;
+  while (i--) {
+    if (this[i] === obj) {
+      return true;
+    }
+  }
+  return false;
+}
+
 var Room = React.createClass({
 
   getInitialState: function () {
     return {
-      message: '',
-      messages: []
+      question: '',
+      questions: []
     };
   },
 
@@ -11,23 +21,14 @@ var Room = React.createClass({
     var self = this;
     this.sendable = true;
     var server = new WebSocket("ws://" + location.hostname + ":" + location.port + "/ws?room=" + location.pathname.split('/').reverse()[0]);
-    var user = localStorage.getItem('aq_userid') || Math.floor((Math.random() * 100000000) + 1);
+    var user = parseInt(localStorage.getItem('aq_userid')) || Math.floor((Math.random() * 100000000) + 1);
     localStorage.setItem('aq_userid', user);
     server.onmessage = function (event) {
-      console.log(event.data);
-      var messages = JSON.parse(event.data);
-      self.setState({messages: messages});
+      // console.log(event.data);
+      var questions = JSON.parse(event.data);
+      self.setState({questions: questions});
       self.refs.message.focus();
     };
-
-    // server.onopen = function () {
-    //   server.send(user + ": joined the room.");
-    // };
-
-    // server.onclose = function () {
-    //   server.send(user + ": left the room.");
-    // };
-
     this.server = server;
     this.user = user;
     this.refs.message.focus();
@@ -53,24 +54,27 @@ var Room = React.createClass({
   },
 
   render: function () {
-    var messages = this.state.messages.map(function (q) {
-      console.log(q);
-      if (q.voters.indexOf(this.user) > -1) {
+    var user = this.user;
+    var questions = this.state.questions.map(function (q) {
+      console.log(user);
+      console.log(q.voters);
+      console.log(q.voters.contains(user));
+      if (q.voters.includes(user)) {
         return React.createElement("li", null,
           React.createElement('span', { className: "votable" }, q.voters.length),
-          React.createElement('span', null, q.name)
+          React.createElement('span', { className: "q" }, q.name)
         );
       } else {
         return React.createElement("li", null,
           React.createElement('span', { className: "voted" }, q.voters.length),
-          React.createElement('span', null, q.name)
+          React.createElement('span', { className: "q" }, q.name)
         );
       }
     });
 
     return React.createElement("div", { className: "questions" },
       React.createElement("input", { autofocus: true, placeholder: "What is your question?", type: "text", ref: "message", onKeyUp: this.sendQuestionWithEnter }),
-      React.createElement("ul", null, messages)
+      React.createElement("ul", null, questions)
     ); 
   }
 
