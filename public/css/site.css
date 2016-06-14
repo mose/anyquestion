@@ -13,6 +13,9 @@ h1 {
 .smaller {
   font-size: .8em;
 }
+.newroom {
+  margin-top: 10px;
+}
 #menu {
   padding: 20px;
 }

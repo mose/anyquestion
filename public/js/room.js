@@ -61,7 +61,7 @@ var Room = React.createClass({
     var self = this;
     var user = this.user;
     var questions = this.state.questions.map(function (q) {
-      if (q.voters.includes(user)) {
+      if (q.voters.contains(user)) {
         return React.createElement("li", null,
           React.createElement('span', { className: "voted" }, q.voters.length),
           React.createElement('span', { className: "q" }, q.name)
