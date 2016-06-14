@@ -48,9 +48,6 @@ var Room = React.createClass({
   },
 
   sendVote: function (qid) {
-    console.log(qid);
-    console.log(this.user);
-
     this.server.send(qid + "----" + this.user);
   },
 
