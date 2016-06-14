@@ -44,15 +44,18 @@ a {
 }
 .questions ul li .voted {
   padding: 15px 20px;
-  background-color: #333;
+  background-color: #222;
+  border: 1px solid #111;
 }
 .questions ul li .votable {
   padding: 15px 20px;
-  background-color: #000;
+  background-color: #444;
   cursor: pointer;
+  border: 1px solid #111;
 }
 .questions ul li .q {
   padding: 15px 20px;
   background-color: #111;
   line-height: 3em;
+  border: 1px solid #111;
 }

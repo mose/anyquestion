@@ -27,22 +27,24 @@ module Anyquestion
     def handle(socket)
       @sockets.push socket unless @sockets.includes? socket
 
-      socket.send @questions.values.to_json
+      socket.send questions_in_order
 
       socket.on_message do |message|
+        # puts message
         parts = message.split(/----/)
         if parts.size > 1
-          question, voter = parts
+          questionId, voter = parts
+          @questions[questionId.to_i].vote(voter.to_i)
         else
           author, text = message.split(/::::/)
           question = Question.new text, author.to_i
           @questions[question.id] = question
-          @sockets.each do |s|
-            begin
-              s.send @questions.values.to_json
-            rescue ex
-              @sockets.delete s
-            end
+        end
+        @sockets.each do |s|
+          begin
+            s.send questions_in_order
+          rescue ex
+            @sockets.delete s
           end
         end
       end
@@ -50,6 +52,10 @@ module Anyquestion
       socket.on_close do |socket|
         @sockets.delete socket
       end
+    end
+
+    def questions_in_order
+      @questions.values.sort_by { |k| -k.votes }.to_json
     end
   end
 end

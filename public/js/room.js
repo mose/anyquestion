@@ -47,9 +47,11 @@ var Room = React.createClass({
     this.sendable = false;
   },
 
-  sendVote: function () {
-    var self = this;
-    this.server.send(this.user + "::::" + this.refs.message.value);
+  sendVote: function (qid) {
+    console.log(qid);
+    console.log(this.user);
+
+    this.server.send(qid + "----" + this.user);
   },
 
   sendQuestionWithEnter: function (e) {
@@ -59,11 +61,9 @@ var Room = React.createClass({
   },
 
   render: function () {
+    var self = this;
     var user = this.user;
     var questions = this.state.questions.map(function (q) {
-      console.log(user);
-      console.log(q.voters);
-      console.log(q.voters.contains(user));
       if (q.voters.includes(user)) {
         return React.createElement("li", null,
           React.createElement('span', { className: "voted" }, q.voters.length),
@@ -71,7 +71,7 @@ var Room = React.createClass({
         );
       } else {
         return React.createElement("li", null,
-          React.createElement('span', { className: "votable", onClick: this.sendVote }, q.voters.length),
+          React.createElement('span', { className: "votable", onClick: self.sendVote.bind(null, q.id) }, q.voters.length),
           React.createElement('span', { className: "q" }, q.name)
         );
       }
