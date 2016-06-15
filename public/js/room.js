@@ -20,7 +20,11 @@ var Room = React.createClass({
   componentDidMount: function () {
     var self = this;
     this.sendable = true;
-    var server = new WebSocket("wss://" + location.hostname + ":" + location.port + "/ws?room=" + location.pathname.split('/').reverse()[0]);
+    if (location.protocol == "https:") {
+      var server = new WebSocket("wss://" + location.hostname + ":" + location.port + "/ws?room=" + location.pathname.split('/').reverse()[0]);
+    } else {
+      var server = new WebSocket("ws://" + location.hostname + ":" + location.port + "/ws?room=" + location.pathname.split('/').reverse()[0]);
+    }
     var user = parseInt(localStorage.getItem('aq_userid')) || Math.floor((Math.random() * 100000000) + 1);
     localStorage.setItem('aq_userid', user);
     server.onmessage = function (event) {
