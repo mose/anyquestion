@@ -27,7 +27,7 @@ Code is not finished yet. but you can launch with:
 
 ## Contributing
 
-- fork it, twist it, but don't submit PR yet, it's not finished.
+- fork it, twist it, submit a PR.
 
 ## License
 
