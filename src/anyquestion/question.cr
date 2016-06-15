@@ -2,20 +2,20 @@ require "json"
 
 module Anyquestion
   class Question
-    @id : Int32
+    @id : Int64
     @name : String
 
     getter :name, :id
 
     JSON.mapping({
       name:   String,
-      id:     Int32,
+      id:     Int64,
       voters: Array(Int32),
     })
 
     def initialize(name, author : Int32)
       @name = name
-      @id = Time.now.to_s("%s").to_i + Random.new.rand(1000)
+      @id = Time.new.epoch + Random.new.rand(1000)
       @voters = [] of Int32
       @voters << author
     end

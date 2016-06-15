@@ -1,6 +1,6 @@
 module Anyquestion
   class Room
-    @id : Int32
+    @id : Int64
     @name : String
     @time_start : Time
 
@@ -11,10 +11,8 @@ module Anyquestion
     def initialize(name)
       @name = name
       @time_start = Time.now
-      puts @time_start
-      @id = @time_start.to_s("%s").to_i + Random.new.rand(1000)
-      puts @id
-      @questions = {} of Int32 => Question
+      @id = Time.new.epoch + Random.new.rand(1000)
+      @questions = {} of Int64 => Question
       @sockets = [] of HTTP::WebSocket
     end
 

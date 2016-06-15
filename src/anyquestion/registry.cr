@@ -1,6 +1,6 @@
 module Anyquestion
   class Registry
-    @rooms = {} of Int32 => Room
+    @rooms = {} of Int64 => Room
     getter :rooms
 
     def add(room : Room)
