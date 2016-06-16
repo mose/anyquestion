@@ -32,11 +32,11 @@ Code is not finished yet. but you can launch with:
 ## Todo
 
 - <s>debug react/kemal for it to refresh always, for now sometimes it doesn't refresh after new question</s>
+- add a possibility to cancel an upvote
 - add a config file/env vars system
-- make a debian package (and redhat maybe, see https://github.com/waghanza/plunder)
 - add an admin account for editing things and cleaning up (oauth2 to github probably)
 - consider an admin action to dump existing set of questions in case of restart
-- add a possibility to cancel an upvote
+- make a debian package (and redhat maybe, see https://github.com/waghanza/plunder)
 - use fibers (`spawn`) to handle websockets maybe
 - expose some api endpoints for plugging irc/slack bots into this
 - check responsivity
