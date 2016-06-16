@@ -33,9 +33,19 @@ var Room = React.createClass({
       self.setState({questions: questions});
       self.refs.question.focus();
     };
+    server.onopen = function () {
+      server.send("hi");
+    };
+    server.onclose = function () {
+      server.send("bye");
+    };
     this.server = server;
     this.user = user;
     this.refs.question.focus();
+  },
+
+  componentWillUnmount: function () {
+    window.removeEventListener("unload");
   },
 
   sendQuestion: function () {

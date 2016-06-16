@@ -25,20 +25,23 @@ module Anyquestion
     end
 
     def handle(socket)
-      @sockets.push socket unless @sockets.includes? socket
+      @sockets.push socket
 
       socket.send questions_in_order
 
       socket.on_message do |message|
-        # puts message
-        parts = message.split(/----/)
-        if parts.size > 1
-          questionId, voter = parts
-          @questions[questionId.to_i].vote(voter.to_i)
+        if message == "bye"
+        elsif message == "hi"
         else
-          author, text = message.split(/::::/)
-          question = Question.new text, author.to_i
-          @questions[question.id] = question
+          parts = message.split(/----/)
+          if parts.size > 1
+            questionId, voter = parts
+            @questions[questionId.to_i].vote(voter.to_i)
+          else
+            author, text = message.split(/::::/)
+            question = Question.new text, author.to_i
+            @questions[question.id] = question
+          end
         end
         @sockets.each do |s|
           begin
