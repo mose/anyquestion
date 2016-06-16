@@ -37,6 +37,7 @@ module Anyquestion
           if parts.size > 1
             questionId, voter = parts
             @questions[questionId.to_i].vote(voter.to_i)
+            @questions.delete questionId.to_i if @questions[questionId.to_i].votes < 1
           else
             author, text = message.split(/::::/)
             question = Question.new text, author.to_i
