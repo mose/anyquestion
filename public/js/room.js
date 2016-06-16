@@ -49,7 +49,7 @@ var Room = React.createClass({
   },
 
   sendQuestion: function () {
-    if (!this.sendable) {
+    if (!this.sendable || this.refs.question.value === "") {
       return false;
     }
     var self = this;
