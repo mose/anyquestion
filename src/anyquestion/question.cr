@@ -25,7 +25,11 @@ module Anyquestion
     end
 
     def vote(voter)
-      @voters.push voter unless @voters.includes? voter
+      if @voters.includes? voter
+        @voters.delete voter
+      else
+        @voters.push voter
+      end
     end
   end
 end

@@ -75,17 +75,10 @@ var Room = React.createClass({
     var self = this;
     var user = this.user;
     var questions = this.state.questions.map(function (q) {
-      if (q.voters.contains(user)) {
-        return React.createElement("li", null,
-          React.createElement('span', { className: "voted" }, q.voters.length),
-          React.createElement('span', { className: "q" }, q.name)
-        );
-      } else {
-        return React.createElement("li", null,
-          React.createElement('span', { className: "votable", onClick: self.sendVote.bind(null, q.id) }, q.voters.length),
-          React.createElement('span', { className: "q" }, q.name)
-        );
-      }
+      return React.createElement("li", null,
+        React.createElement('span', { className: (q.voters.contains(user) ? "voted" : "votable"), onClick: self.sendVote.bind(null, q.id) }, q.voters.length),
+        React.createElement('span', { className: "q" }, q.name)
+      );
     });
 
     return React.createElement("div", { className: "questions" },

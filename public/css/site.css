@@ -55,12 +55,23 @@ h1 {
   padding: 15px 20px;
   background-color: #222;
   border: 1px solid #111;
+  cursor: pointer;
+}
+.questions ul li .voted:hover:after {
+  content: '--';
+  margin-left: 10px;
+  font-family: monospace;
 }
 .questions ul li .votable {
   padding: 15px 20px;
   background-color: #444;
-  cursor: pointer;
   border: 1px solid #111;
+  cursor: pointer;
+}
+.questions ul li .votable:hover:after {
+  content: '++';
+  margin-left: 10px;
+  font-family: monospace;
 }
 .questions ul li .q {
   padding: 15px 20px;

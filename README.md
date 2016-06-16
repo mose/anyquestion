@@ -31,8 +31,10 @@ Code is not finished yet. but you can launch with:
 
 ## Todo
 
+Check the [CHANGELOG.md](CHANGELOG.md) file for details.
+
 - <s>debug react/kemal for it to refresh always, for now sometimes it doesn't refresh after new question</s>
-- add a possibility to cancel an upvote
+- <s>add a possibility to cancel an upvote</s>
 - add a config file/env vars system
 - add an admin account for editing things and cleaning up (oauth2 to github probably)
 - consider an admin action to dump existing set of questions in case of restart
@@ -40,6 +42,7 @@ Code is not finished yet. but you can launch with:
 - use fibers (`spawn`) to handle websockets maybe
 - expose some api endpoints for plugging irc/slack bots into this
 - check responsivity
+
 
 ## Contributing
 
