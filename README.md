@@ -17,8 +17,10 @@ Code is not finished yet. but you can launch with:
     crystal build --release src/anyquestion.cr
     ./anyquestion -e production
 
-    # deploy (embedding all libs for portability)
-    crystal build src/anyquestion.cr --release --link-flags "-static -L/opt/crystal/embedded/lib"
+    # deploy on heroku
+    heroku create appname --buildpack https://github.com/crystal-lang/heroku-buildpack-crystal.git
+    heroku git:remote -a appname
+    git push heroku master
 
 ## dev links
 
