@@ -6,6 +6,14 @@ There is a test install on http://anyquestion.herokuapp.com/ . As the data are n
 
 ## Usage
 
+You have been to conferences, right? Every time at then end, there is some time for the questions. But sometimes people are shy, or there is some mike issue, or people are not native speaker and their strong accent prevent everybody to understand what they ask.
+
+Make this web app reachable for you attendee. They can ask questions during the talk, so there is no way to forget them. They can upvote the questions of other people. They also can cancel their own upvotes if they change their minds or if the speaker answered the question before it was asked, in the progress of his talk. Questions that reach zero vote will just disappear.
+
+Typically, then at the end, the speaker of someone else can access the questions, pick in the ones that are the most popular, and answer them.
+
+## Dev
+
 Code is not finished yet. but you can launch with:
 
     shards install
