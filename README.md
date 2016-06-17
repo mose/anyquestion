@@ -10,7 +10,7 @@ You have been to conferences, right? Every time at then end, there is some time 
 
 Make this web app reachable for you attendee. They can ask questions during the talk, so there is no way to forget them. They can upvote the questions of other people. They also can cancel their own upvotes if they change their minds or if the speaker answered the question before it was asked, in the progress of his talk. Questions that reach zero vote will just disappear.
 
-Typically, then at the end, the speaker of someone else can access the questions, pick in the ones that are the most popular, and answer them.
+Typically, at the end, the speaker or someone else can access the questions, pick in the ones that are the most popular and read them. The speaker can then answer them.
 
 ## Dev
 
