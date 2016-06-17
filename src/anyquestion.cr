@@ -1,6 +1,8 @@
 require "kemal"
 require "./anyquestion/*"
 
+Anyquestion::Config.load("development")
+
 registry = Anyquestion::Registry.new
 
 macro in_layout(tpl)
