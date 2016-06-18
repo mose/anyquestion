@@ -4,8 +4,6 @@ require "./anyquestion/*"
 config = Anyquestion::Configuration.load
 registry = Anyquestion::Registry.new
 
-puts config.public_folder
-
 public_folder config.public_folder
 
 macro in_layout(tpl)
