@@ -1,10 +1,12 @@
 require "kemal"
 require "./anyquestion/*"
 
-config = Anyquestion::Config.from_yaml Anyquestion::Configuration.get_config
+config = Anyquestion::Configuration.load
 registry = Anyquestion::Registry.new
 
-public_folder config.public_folder.to_s
+puts config.public_folder
+
+public_folder config.public_folder
 
 macro in_layout(tpl)
   render "views/#{{{tpl}}}.ecr", "views/layout.ecr"

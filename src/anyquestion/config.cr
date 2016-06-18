@@ -2,10 +2,15 @@ require "yaml"
 
 module Anyquestion
   class Config
-    getter :get
-
     YAML.mapping(
-      public_folder: String
+      public_folder: {
+        type:    String,
+        default: "public",
+      },
+      css_file: {
+        type:    String,
+        default: "css/site.css",
+      }
     )
   end
 end

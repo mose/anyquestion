@@ -1,7 +1,9 @@
-require "yaml"
-
 module Anyquestion
   class Configuration
+    def self.load
+      Anyquestion::Config.from_yaml self.get_config
+    end
+
     def self.config_path
       if ENV["AQ_CONFIG"]? && File.exists? ENV["AQ_CONFIG"]
         ENV["AQ_CONFIG"]
