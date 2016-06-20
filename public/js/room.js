@@ -1,3 +1,5 @@
+"use strict";
+
 Array.prototype.contains = function(obj) {
   let i = this.length;
   while (i--) {
