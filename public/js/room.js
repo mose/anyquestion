@@ -1,5 +1,5 @@
 Array.prototype.contains = function(obj) {
-  var i = this.length;
+  let i = this.length;
   while (i--) {
     if (this[i] === obj) {
       return true;
@@ -8,85 +8,99 @@ Array.prototype.contains = function(obj) {
   return false;
 }
 
-var Room = React.createClass({
+const User = function(){
+  let user = parseInt(localStorage.getItem('aq_userid')) || Math.floor((Math.random() * 100000000) + 1);
+  localStorage.setItem('aq_userid', user);
+  return user;
+}
 
-  getInitialState: function () {
-    return {
+const Server = function(){
+  const ws_protocol = location.protocol == "https:" ? 'wss' : 'ws';
+  return new WebSocket(`${ws_protocol}://${location.hostname}:${location.port}/ws?room=${location.pathname.split('/').reverse()[0]}`);
+}
+
+class Room extends React.Component {
+  constructor(props){
+    super(props);
+    this.state ={
       question: '',
       questions: []
-    };
-  },
-
-  componentDidMount: function () {
-    var self = this;
-    this.sendable = true;
-    if (location.protocol == "https:") {
-      var server = new WebSocket("wss://" + location.hostname + ":" + location.port + "/ws?room=" + location.pathname.split('/').reverse()[0]);
-    } else {
-      var server = new WebSocket("ws://" + location.hostname + ":" + location.port + "/ws?room=" + location.pathname.split('/').reverse()[0]);
     }
-    var user = parseInt(localStorage.getItem('aq_userid')) || Math.floor((Math.random() * 100000000) + 1);
-    localStorage.setItem('aq_userid', user);
-    server.onmessage = function (event) {
-      // console.log(event.data);
-      var questions = JSON.parse(event.data);
-      self.setState({questions: questions});
+  }
+
+  componentDidMount() {
+    this.sendable = true;
+    const self = this;
+    let server, user, questions;
+
+    server = Server();
+    user = User();
+
+    server.onmessage = event => {
+      questions = JSON.parse(event.data);
+      self.setState({questions});
       self.refs.question.focus();
     };
-    server.onopen = function () {
+
+    server.onopen = () => {
       server.send("hi");
     };
-    server.onclose = function () {
+
+    server.onclose = () => {
       server.send("bye");
     };
-    this.server = server;
-    this.user = user;
+
+    this.props.server = server;
+    this.props.user = user;
+
     this.refs.question.focus();
-  },
+  }
 
-  componentWillUnmount: function () {
+  componentWillUnmount() {
     window.removeEventListener("unload");
-  },
+  }
 
-  sendQuestion: function () {
+  sendQuestion() {
+    const self = this;
     if (!this.sendable || this.refs.question.value === "") {
       return false;
     }
-    var self = this;
-    setTimeout(function () {
-      self.sendable = true; 
+
+    setTimeout(() => {
+      self.sendable = true;
     }, 100);
-    this.server.send(this.user + "::::" + this.refs.question.value);
+
+    this.props.server.send(`${this.props.user}::::${this.refs.question.value}`);
+
     this.refs.question.value = '';
     this.sendable = false;
-  },
-
-  sendVote: function (qid) {
-    this.server.send(qid + "----" + this.user);
-  },
-
-  sendQuestionWithEnter: function (e) {
-    if (e.keyCode == 13) {
-     this.sendQuestion(); 
-    }
-  },
-
-  render: function () {
-    var self = this;
-    var user = this.user;
-    var questions = this.state.questions.map(function (q) {
-      return React.createElement("li", null,
-        React.createElement('span', { className: (q.voters.contains(user) ? "voted" : "votable"), onClick: self.sendVote.bind(null, q.id) }, q.voters.length),
-        React.createElement('span', { className: "q" }, q.name)
-      );
-    });
-
-    return React.createElement("div", { className: "questions" },
-      React.createElement("input", { autofocus: true, placeholder: "What is your question?", type: "text", ref: "question", onKeyUp: this.sendQuestionWithEnter }),
-      React.createElement("ul", null, questions)
-    ); 
   }
 
-});
+  sendVote(qid) {
+    this.props.server.send(`${qid}----${this.props.user}`);
+  }
+
+  sendQuestionWithEnter(e) {
+    if (e.keyCode == 13) {
+     this.sendQuestion();
+    }
+  }
+
+  render() {
+    var user = this.props.user;
+    var server = this.props.server;
+
+    const questions = this.state.questions.map(q => React.createElement("li", null,
+      React.createElement('span', { className: (q.voters.contains(user) ? "voted" : "votable"), onClick: this.sendVote.bind(this, q.id) }, q.voters.length),
+      React.createElement('span', { className: "q" }, q.name)
+    ));
+
+    return React.createElement("div", { className: "questions" },
+      React.createElement("input", { autofocus: true, placeholder: "What is your question?", type: "text", ref: "question", onKeyUp: this.sendQuestionWithEnter.bind(this) }),
+      React.createElement("ul", null, questions)
+    );
+  }
+}
+
 
 ReactDOM.render(React.createElement(Room, null), document.getElementById('room'));
