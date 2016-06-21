@@ -48,7 +48,8 @@ class Room extends React.Component {
       server.send("hi");
     };
 
-    server.onclose = () => {
+    server.onclose = (e) => {
+      console.log(e);
       server.send("bye");
     };
 
@@ -63,6 +64,7 @@ class Room extends React.Component {
   }
 
   sendQuestion() {
+    console.log(this.props.server.readyState);
     const self = this;
     if (!this.sendable || this.refs.question.value === "") {
       return false;
