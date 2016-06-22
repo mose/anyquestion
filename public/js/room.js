@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
 Array.prototype.contains = function(obj) {
-  let i = this.length;
+  var i = this.length;
   while (i--) {
     if (this[i] === obj) {
       return true;
@@ -10,30 +10,30 @@ Array.prototype.contains = function(obj) {
   return false;
 }
 
-const User = function(){
-  let user = parseInt(localStorage.getItem('aq_userid')) || Math.floor((Math.random() * 100000000) + 1);
+var User = function(){
+  var user = parseInt(localStorage.getItem('aq_userid')) || Math.floor((Math.random() * 100000000) + 1);
   localStorage.setItem('aq_userid', user);
   return user;
 }
 
-const Server = function(){
-  const ws_protocol = location.protocol == "https:" ? 'wss' : 'ws';
+var Server = function(){
+  var ws_protocol = location.protocol == "https:" ? 'wss' : 'ws';
   return new WebSocket(`${ws_protocol}://${location.hostname}:${location.port}/ws?room=${location.pathname.split('/').reverse()[0]}`);
 }
 
-class Room extends React.Component {
-  constructor(props){
-    super(props);
-    this.state ={
+var Room = React.createClass({
+
+  getInitialState: function () {
+    return {
       question: '',
       questions: []
     }
-  }
+  },
 
-  componentDidMount() {
+  componentDidMount: function () {
     this.sendable = true;
-    const self = this;
-    let server, user, questions;
+    var self = this;
+    var server, user, questions;
 
     server = Server();
     user = User();
@@ -57,15 +57,15 @@ class Room extends React.Component {
     this.props.user = user;
 
     this.refs.question.focus();
-  }
+  },
 
-  componentWillUnmount() {
+  componentWillUnmount: function () {
     window.removeEventListener("unload");
-  }
+  },
 
-  sendQuestion() {
+  sendQuestion: function () {
     console.log(this.props.server.readyState);
-    const self = this;
+    var self = this;
     if (!this.sendable || this.refs.question.value === "") {
       return false;
     }
@@ -78,19 +78,19 @@ class Room extends React.Component {
 
     this.refs.question.value = '';
     this.sendable = false;
-  }
+  },
 
-  sendVote(qid) {
+  sendVote: function (qid) {
     this.props.server.send(`${qid}----${this.props.user}`);
-  }
+  },
 
-  sendQuestionWithEnter(e) {
+  sendQuestionWithEnter: function (e) {
     if (e.keyCode == 13) {
      this.sendQuestion();
     }
-  }
+  },
 
-  render() {
+  render: function () {
     var user = this.props.user;
     var server = this.props.server;
 
@@ -104,7 +104,6 @@ class Room extends React.Component {
       React.createElement("ul", null, questions)
     );
   }
-}
-
+});
 
 ReactDOM.render(React.createElement(Room, null), document.getElementById('room'));
