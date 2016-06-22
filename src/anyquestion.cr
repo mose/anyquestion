@@ -53,6 +53,10 @@ ws "/ws" do |socket, env|
   end
 end
 
+get "/clean" do |env|
+  in_layout "clean"
+end
+
 error 404 do
   in_layout "404"
 end

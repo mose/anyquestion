@@ -7,6 +7,7 @@ module Anyquestion
     getter :id
     getter :name
     getter :time_start
+    getter :questions
 
     def initialize(name)
       @name = name

@@ -78,3 +78,6 @@ h1 {
   line-height: 3em;
   border: 1px solid #111;
 }
+.question {
+  margin-left: 60px;
+}

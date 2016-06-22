@@ -1,23 +1,30 @@
-<h1>Any Question?</h1>
+<h1>Clean things</h1>
 
-<% if config.anon_create %>
 <form action="/room" method="post" class="newroom">
 New room 
 <input type="text" name="name">
 <input type="submit" name="submit" value="Create">
 </form>
-<% end %>
-
 <% if registry.rooms.empty? %>
   No room created yet.
 <% else %>
   <% registry.rooms.each do |i,room| %>
   <div class="registry">
+  <a href="/room/<%= room.id %>/delete">DEL</a>
+  -
+  <tt><%= room.id %></tt>
   <b><a href="/room/<%= room.id %>"><%= room.name %></a></b>
   <span class="smaller">
   (<%=room.nb_users %> users)
   (<%=room.nb_questions %> questions)
   </span>
   </div>
+  <% room.questions.each do |i, question| %>
+  <div class="question">
+    <a href="/question/<%= i %>/delete">DEL</a>
+    <%= question.voters.size %> - 
+    <%= question.name %>
+  </div>
+  <% end %>
   <% end %>
 <% end %>

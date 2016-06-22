@@ -12,6 +12,10 @@ module Anyquestion
       css_file: {
         type:    String,
         default: "css/site.css",
+      },
+      anon_create: {
+        type:    Bool,
+        default: true,
       }
     )
 
