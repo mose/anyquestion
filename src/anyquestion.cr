@@ -65,25 +65,28 @@ end
 
 get "/login" do |env|
   logged = sessions.check?(env, "logged")
-  msg = env.params.query["msg"]
+  msg = env.params.query["msg"]? ? env.params.query["msg"] : ""
   in_layout "login"
 end
 
 post "/login" do |env|
   logged = sessions.check?(env, "logged")
-  if config.password == env.params.query["password"]
+  if config.password == env.params.body["password"]
     sessions.set(env, "logged")
+    env.redirect "/"
   else
-    env.redirect "/login"
+    env.redirect "/login?msg=hmm"
   end
 end
 
 get "/logout" do |env|
+  sessions.drop(env)
   logged = sessions.check?(env, "logged")
   env.redirect "/"
 end
 
-error 404 do
+error 404 do |env|
+  logged = sessions.check?(env, "logged")
   in_layout "404"
 end
 

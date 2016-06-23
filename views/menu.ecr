@@ -1,3 +1,8 @@
 <a href="/">Home</a>
 <a href="/help">Help</a>
 <a href="https://github.com/mose/anyquestion">Source</a>
+<% if logged %>
+<a href="/logout">Out</a>
+<% else %>
+<a href="/login" class="login">In</a>
+<% end %>
