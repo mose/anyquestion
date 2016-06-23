@@ -28,6 +28,15 @@ h1 {
   color: #fff;
   background-color: #000;
 }
+#menu a.login {
+  background-color: #fff;
+  color: #fff;
+  float: right;
+}
+#menu a.login:hover {
+  background-color: #ddd;
+  color: #aaa;
+}
 #meat {
   padding: 10px 30px;
 }

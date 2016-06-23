@@ -36,7 +36,6 @@ h1 {
 #menu a.login:hover {
   background-color: #111;
   color: #444;
-  float: right;
 }
 #meat {
   padding: 10px 30px;

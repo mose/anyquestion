@@ -1,6 +1,6 @@
 <h1>Any Question?</h1>
 
-<% if config.anon_create %>
+<% if config.anon_create || logged %>
 <form action="/room" method="post" class="newroom">
 New room 
 <input type="text" name="name">

@@ -13,6 +13,7 @@ end
 
 get "/" do |env|
   logged = sessions.check?(env, "logged")
+  puts config.anon_create
   in_layout "home"
 end
 
@@ -23,10 +24,14 @@ end
 
 post "/room" do |env|
   logged = sessions.check?(env, "logged")
-  name = env.params.body["name"]
-  room = Anyquestion::Room.new(name)
-  registry.add room
-  env.redirect "/room/#{room.id}"
+  if config.anon_create || logged
+    name = env.params.body["name"]
+    room = Anyquestion::Room.new(name)
+    registry.add room
+    env.redirect "/room/#{room.id}"
+  else
+    env.redirect "/"
+  end
 end
 
 get "/room/:id" do |env|
@@ -60,12 +65,15 @@ end
 
 get "/clean" do |env|
   logged = sessions.check?(env, "logged")
-  in_layout "clean"
+  if logged
+    in_layout "clean"
+  else
+    env.redirect "/"
+  end
 end
 
 get "/login" do |env|
   logged = sessions.check?(env, "logged")
-  msg = env.params.query["msg"]? ? env.params.query["msg"] : ""
   in_layout "login"
 end
 
@@ -75,7 +83,7 @@ post "/login" do |env|
     sessions.set(env, "logged")
     env.redirect "/"
   else
-    env.redirect "/login?msg=hmm"
+    env.redirect "/login"
   end
 end
 

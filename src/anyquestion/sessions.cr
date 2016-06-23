@@ -16,17 +16,22 @@ module Anyquestion
     end
 
     def drop(env)
-      if env.request.cookies[@session_name]? && @all[env.request.cookies[@session_name].value.to_i32]?
+      if has_session(env)
         @all.delete env.request.cookies[@session_name].value.to_i32
       end
     end
 
     def check?(env, value)
-      if env.request.cookies[@session_name]? && @all[env.request.cookies[@session_name].value.to_i32]?
+      if has_session(env)
         @all[env.request.cookies[@session_name].value.to_i32] == value
       else
         false
       end
+    end
+
+    def has_session(env)
+      env.request.cookies[@session_name]? &&
+        @all[env.request.cookies[@session_name].value.to_i32]?
     end
   end
 end

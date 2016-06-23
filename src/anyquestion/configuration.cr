@@ -10,7 +10,7 @@ module Anyquestion
       if ENV["AQ_CONFIG"]? && File.exists? ENV["AQ_CONFIG"]
         ENV["AQ_CONFIG"]
       else
-        configfile = File.expand_path("#{__DIR__}/../../../config/config.yml")
+        configfile = File.expand_path("#{__DIR__}/../../config/config.yml")
         distfile = File.expand_path("#{__DIR__}/../../config/config.dist.yml")
         unless File.exists?(configfile) || !File.exists?(distfile)
           configfile = File.expand_path("#{__DIR__}/../../config/config.dist.yml")
