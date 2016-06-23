@@ -1,5 +1,5 @@
 name: anyquestion
-version: 0.1.0
+version: 0.1.1
 
 authors:
   - mose <mose@mose.com>
@@ -7,6 +7,9 @@ authors:
 dependencies:
   kemal:
     github: sdogruyol/kemal
+    branch: master
+  kemal-session:
+    github: Thyra/kemal-session
     branch: master
 
 license: MIT

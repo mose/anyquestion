@@ -1,4 +1,5 @@
 require "kemal"
+require "kemal-session"
 require "./anyquestion/*"
 
 config = Anyquestion::Configuration.load
