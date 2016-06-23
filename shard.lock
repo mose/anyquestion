@@ -1,9 +1,5 @@
 version: 1.0
 shards:
-  ambience:
-    github: vjdhama/ambience
-    commit: c543edd9f1f19dcffba6f2f938fdf95ae48bb333
-
   kemal:
     github: sdogruyol/kemal
     commit: 56067b628097193d9491dc72a3b05204a19e7e74

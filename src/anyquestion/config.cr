@@ -16,6 +16,14 @@ module Anyquestion
       anon_create: {
         type:    Bool,
         default: true,
+      },
+      password: {
+        type:    String,
+        default: "xxx",
+      },
+      session_name: {
+        type:    String,
+        default: "aq_id",
       }
     )
 

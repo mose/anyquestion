@@ -8,8 +8,5 @@ dependencies:
   kemal:
     github: sdogruyol/kemal
     branch: master
-  kemal-session:
-    github: Thyra/kemal-session
-    branch: master
 
 license: MIT
