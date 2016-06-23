@@ -16,7 +16,7 @@ get "/" do |env|
   in_layout "home"
 end
 
-get "/help" do
+get "/help" do |env|
   logged = sessions.check?(env, "logged")
   in_layout "help"
 end
@@ -80,7 +80,6 @@ end
 
 get "/logout" do |env|
   logged = sessions.check?(env, "logged")
-  env.session.int("logged", false)
   env.redirect "/"
 end
 
