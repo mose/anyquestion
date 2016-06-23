@@ -1,6 +1,11 @@
 AnyQuestion Changelog
 =========================
 
+### v0.1.2 - 2016-06-23
+- add an admin login option
+- add a way to restrict room creation to admin
+- add more config parameters for doing so
+
 ### v0.1.1 - 2016-06-17
 - add possibility to downvote a previously upvote question
 - questions reaching zero disappear (effectively enabling cancelling of questions)
