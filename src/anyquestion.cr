@@ -11,23 +11,19 @@ macro in_layout(tpl)
   render "views/#{{{tpl}}}.ecr", "views/layout.ecr"
 end
 
-macro init_auth
-  logged = sessions.check?(env, "logged")
-end
-
 get "/" do |env|
-  init_auth
+  logged = sessions.check?(env, "logged")
   puts config.anon_create
   in_layout "home"
 end
 
 get "/help" do |env|
-  init_auth
+  logged = sessions.check?(env, "logged")
   in_layout "help"
 end
 
 post "/room" do |env|
-  init_auth
+  logged = sessions.check?(env, "logged")
   if config.anon_create || logged
     name = env.params.body["name"]
     room = Anyquestion::Room.new(name)
@@ -39,7 +35,7 @@ post "/room" do |env|
 end
 
 get "/room/:id" do |env|
-  init_auth
+  logged = sessions.check?(env, "logged")
   begin
     id = env.params.url["id"].to_i
     if registry.rooms[id]?
@@ -68,7 +64,7 @@ ws "/ws" do |socket, env|
 end
 
 get "/clean" do |env|
-  init_auth
+  logged = sessions.check?(env, "logged")
   if logged
     in_layout "clean"
   else
@@ -77,12 +73,12 @@ get "/clean" do |env|
 end
 
 get "/login" do |env|
-  init_auth
+  logged = sessions.check?(env, "logged")
   in_layout "login"
 end
 
 post "/login" do |env|
-  init_auth
+  logged = sessions.check?(env, "logged")
   if config.password == env.params.body["password"]
     sessions.set(env, "logged")
     env.redirect "/"
@@ -93,12 +89,12 @@ end
 
 get "/logout" do |env|
   sessions.drop(env)
-  init_auth
+  logged = sessions.check?(env, "logged")
   env.redirect "/"
 end
 
 error 404 do |env|
-  init_auth
+  logged = sessions.check?(env, "logged")
   in_layout "404"
 end
 
