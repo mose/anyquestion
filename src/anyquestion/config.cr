@@ -7,6 +7,7 @@ module Anyquestion
         {% for var in vars %}
           @{{var.id}} = ENV["AQ_{{var.id.upcase}}"]? || @{{var.id}}
         {% end %}
+        self
       end
     end
 

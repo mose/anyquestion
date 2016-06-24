@@ -1,9 +1,7 @@
 module Anyquestion
   class Configuration
     def self.load
-      config = Anyquestion::Config.from_yaml self.config_path
-      config.override_with_env
-      config
+      Anyquestion::Config.from_yaml(self.config_path).override_with_env
     end
 
     def self.config_path
