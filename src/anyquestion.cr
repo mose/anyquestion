@@ -23,7 +23,7 @@ end
 
 post "/room" do |env|
   logged = sessions.check?(env, "logged")
-  if config.anon_create || logged
+  if config.anon_create && config.anon_create != "false" || logged
     name = env.params.body["name"]
     room = Anyquestion::Room.new(name)
     registry.add room
