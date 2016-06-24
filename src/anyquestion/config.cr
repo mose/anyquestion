@@ -3,7 +3,7 @@ require "yaml"
 module Anyquestion
   class Config
     macro build_overriding(vars)
-      def override_with_env()
+      def override_with_env
         {% for var in vars %}
           @{{var.id}} = ENV["AQ_{{var.id.upcase}}"]? || @{{var.id}}
         {% end %}
