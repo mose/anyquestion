@@ -2,7 +2,13 @@ require "yaml"
 
 module Anyquestion
   class Config
-    @overridable_by_env = %w(public_folder css_file)
+    macro build_overriding(vars)
+      def override_with_env()
+        {% for var in vars %}
+          @{{var}} = ENV['{{var}}']? || @{{var}}
+        {% end %}
+      end
+    end
 
     YAML.mapping(
       public_folder: {
@@ -27,11 +33,6 @@ module Anyquestion
       }
     )
 
-    def override_with_env
-      @overridable_by_env.each do |key|
-        if self.respond_to key_to_sym
-        end
-      end
-    end
+    build_overriding(%w(public_folder css_file))
   end
 end
