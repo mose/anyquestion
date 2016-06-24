@@ -21,8 +21,8 @@ module Anyquestion
         default: "css/site.css",
       },
       anon_create: {
-        type:    Bool | String,
-        default: true,
+        type:    String,
+        default: "true",
       },
       password: {
         type:    String,

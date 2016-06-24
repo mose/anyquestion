@@ -1,7 +1,7 @@
 ---
-public_folder: public
-css_file: css/site.css
+public_folder: "public"
+css_file: "css/site.css"
 # css_file: css/site_clear.css
-anon_create: true
-password: xxx
-session_name: aq_id
+anon_create: "true"
+password: "xxx"
+session_name: "aq_id"
