@@ -4,7 +4,7 @@ module Anyquestion
   class Question
     @id : Int64
     @name : String
-    @ansered : Bool
+    @answered : Bool
 
     getter :name, :id
 
