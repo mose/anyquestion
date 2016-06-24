@@ -92,6 +92,35 @@ get "/logout" do |env|
   env.redirect "/"
 end
 
+get "/question/:rid/:qid/delete" do |env|
+  logged = sessions.check?(env, "logged")
+  if logged
+    rid = env.params.url["rid"].to_i
+    if registry.rooms[rid]?
+      room = registry.rooms[rid]
+      qid = env.params.url["qid"].to_i
+      room.questions.delete qid
+    end
+    env.redirect "/clean"
+  else
+    env.redirect "/"
+  end
+end
+
+get "/room/:id/delete" do |env|
+  logged = sessions.check?(env, "logged")
+  if logged
+    id = env.params.url["id"].to_i
+    if registry.rooms[id]?
+      room = registry.rooms[id]
+      registry.rooms.delete id
+    end
+    env.redirect "/clean"
+  else
+    env.redirect "/"
+  end
+end
+
 error 404 do |env|
   logged = sessions.check?(env, "logged")
   in_layout "404"

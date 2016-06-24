@@ -21,7 +21,7 @@ New room
   </div>
   <% room.questions.each do |i, question| %>
   <div class="question">
-    <a href="/question/<%= i %>/delete">DEL</a>
+    <a href="/question/<%= room.id %>/<%= i %>/delete">DEL</a>
     <%= question.voters.size %> - 
     <%= question.name %>
   </div>
