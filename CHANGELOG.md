@@ -1,8 +1,9 @@
 AnyQuestion Changelog
 =========================
 
-### v0.1.3 - wip
+### v0.1.3 - 2016-06-25
 - make possible to override config values with environment variables
+- add clean features for rooms and questions
 
 ### v0.1.2 - 2016-06-23
 - add an admin login option
