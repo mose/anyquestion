@@ -13,7 +13,6 @@ end
 
 get "/" do |env|
   logged = sessions.check?(env, "logged")
-  puts config.anon_create
   in_layout "home"
 end
 

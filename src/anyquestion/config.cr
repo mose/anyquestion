@@ -5,7 +5,7 @@ module Anyquestion
     macro build_overriding(vars)
       def override_with_env()
         {% for var in vars %}
-          @{{var}} = ENV['{{var}}']? || @{{var}}
+          @{{var.id}} = ENV["AQ_{{var.id.upcase}}"]? || @{{var.id}}
         {% end %}
       end
     end
@@ -20,7 +20,7 @@ module Anyquestion
         default: "css/site.css",
       },
       anon_create: {
-        type:    Bool,
+        type:    Bool | String,
         default: true,
       },
       password: {
@@ -33,6 +33,12 @@ module Anyquestion
       }
     )
 
-    build_overriding(%w(public_folder css_file))
+    build_overriding(%w(
+      public_folder
+      css_file
+      anon_create
+      password
+      session_name
+    ))
   end
 end

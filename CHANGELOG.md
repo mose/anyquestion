@@ -2,6 +2,7 @@ AnyQuestion Changelog
 =========================
 
 ### v0.1.3 - wip
+- make possible to override config values with environment variables
 
 ### v0.1.2 - 2016-06-23
 - add an admin login option
