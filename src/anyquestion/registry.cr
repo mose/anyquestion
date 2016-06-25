@@ -1,10 +1,10 @@
 module Anyquestion
   class Registry
-    @rooms = {} of Int64 => Room
+    @rooms = {} of String => Room
     getter :rooms
 
     JSON.mapping({
-      rooms: Hash(Int64, Room),
+      rooms: Hash(String, Room),
     })
 
     def initialize
@@ -13,7 +13,7 @@ module Anyquestion
     def add(room : Room)
       # TODO check if rooms already exists
       unless @rooms[room.id]?
-        @rooms[room.id] = room
+        @rooms[room.id.to_s] = room
       end
     end
 

@@ -36,7 +36,7 @@ end
 get "/room/:id" do |env|
   logged = sessions.check?(env, "logged")
   begin
-    id = env.params.url["id"].to_i
+    id = env.params.url["id"]
     if registry.rooms[id]?
       room = registry.rooms[id]
       render "views/room.ecr"
@@ -50,7 +50,7 @@ end
 
 ws "/ws" do |socket, env|
   begin
-    id = env.params.query["room"].to_i
+    id = env.params.query["room"]
     if registry.rooms[id]?
       room = registry.rooms[id]
       room.handle socket
@@ -95,10 +95,10 @@ end
 get "/question/:rid/:qid/delete" do |env|
   logged = sessions.check?(env, "logged")
   if logged
-    rid = env.params.url["rid"].to_i
+    rid = env.params.url["rid"]
     if registry.rooms[rid]?
       room = registry.rooms[rid]
-      qid = env.params.url["qid"].to_i
+      qid = env.params.url["qid"]
       room.questions.delete qid
     end
     env.redirect "/clean"
@@ -110,7 +110,7 @@ end
 get "/room/:id/delete" do |env|
   logged = sessions.check?(env, "logged")
   if logged
-    id = env.params.url["id"].to_i
+    id = env.params.url["id"]
     if registry.rooms[id]?
       room = registry.rooms[id]
       registry.rooms.delete id
@@ -125,7 +125,7 @@ get "/export" do |env|
   logged = sessions.check?(env, "logged")
   if logged
     env.response.content_type = "application/json"
-    registry.to_json
+    {"payload": registry}.to_json
   else
     env.redirect "/"
   end
@@ -134,7 +134,17 @@ end
 get "/import" do |env|
   logged = sessions.check?(env, "logged")
   if logged
-    env.redirect "/import"
+    in_layout "import"
+  else
+    env.redirect "/"
+  end
+end
+
+post "/import" do |env|
+  logged = sessions.check?(env, "logged")
+  if logged
+    registry = Anyquestion::Registry.from_json env.params.body["meat"], root: "payload"
+    env.redirect "/"
   else
     env.redirect "/"
   end

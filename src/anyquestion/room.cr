@@ -13,7 +13,7 @@ module Anyquestion
       @name = name
       @time_start = Time.now
       @id = Time.new.epoch + Random.new.rand(1000)
-      @questions = {} of Int64 => Question
+      @questions = {} of String => Question
     end
 
     JSON.mapping({
@@ -23,7 +23,7 @@ module Anyquestion
         converter: Time::EpochConverter,
       },
       id:        Int64,
-      questions: Hash(Int64, Question),
+      questions: Hash(String, Question),
     })
 
     def sockets
@@ -50,12 +50,12 @@ module Anyquestion
           parts = message.split(/----/)
           if parts.size > 1
             questionId, voter = parts
-            @questions[questionId.to_i].vote(voter.to_i)
-            @questions.delete questionId.to_i if @questions[questionId.to_i].votes < 1
+            @questions[questionId].vote(voter.to_i)
+            @questions.delete questionId if @questions[questionId].votes < 1
           else
             author, text = message.split(/::::/)
             question = Question.new text, author.to_i
-            @questions[question.id] = question
+            @questions[question.id.to_s] = question
           end
         end
         sockets.each do |s|

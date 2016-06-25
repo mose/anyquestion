@@ -1,6 +1,9 @@
 AnyQuestion Changelog
 =========================
 
+### v0.1.4 - wip
+- import/export saves and restores all the rooms
+
 ### v0.1.3 - 2016-06-25
 - make possible to override config values with environment variables
 - add clean features for rooms and questions
