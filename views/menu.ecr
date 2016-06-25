@@ -8,6 +8,6 @@
 <% if config.autologged == "false" %>
 <a href="/logout">Out</a>
 <% end %>
-<% else %>
+<% elsif config.autologged == "false" %>
 <a href="/login" class="login">In</a>
 <% end %>
