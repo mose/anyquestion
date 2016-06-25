@@ -31,6 +31,10 @@ module Anyquestion
       session_name: {
         type:    String,
         default: "aq_id",
+      },
+      autologged: {
+        type:    String,
+        default: "false",
       }
     )
 
@@ -40,6 +44,7 @@ module Anyquestion
       anon_create
       password
       session_name
+      autologged
     ))
   end
 end

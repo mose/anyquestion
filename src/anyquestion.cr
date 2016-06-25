@@ -1,4 +1,5 @@
 require "kemal"
+require "uri"
 require "./anyquestion/*"
 
 config = Anyquestion::Configuration.load
@@ -25,7 +26,7 @@ post "/room" do |env|
   logged = sessions.check?(env, "logged")
   if config.anon_create != "false" || logged
     name = env.params.body["name"]
-    room = Anyquestion::Room.new(name)
+    room = Anyquestion::Room.new(HTML.escape name)
     registry.add room
     env.redirect "/room/#{room.id}"
   else

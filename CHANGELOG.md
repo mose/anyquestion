@@ -1,6 +1,9 @@
 AnyQuestion Changelog
 =========================
 
+### v0.1.5 - wip
+- add html escape for questions
+
 ### v0.1.4 - 2016-06-25
 - import/export saves and restores all the rooms
 
