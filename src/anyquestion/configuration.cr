@@ -1,3 +1,5 @@
+require "./config"
+
 module Anyquestion
   class Configuration
     def self.load

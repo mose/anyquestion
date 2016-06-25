@@ -90,3 +90,6 @@ h1 {
 .question {
   margin-left: 60px;
 }
+.newroom textarea {
+  width: 100%;
+}
