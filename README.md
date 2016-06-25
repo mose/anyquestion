@@ -4,7 +4,7 @@ This is a web app for managing the step "Do you have any question?" that happens
 
 There is a test install on http://anyquestion.herokuapp.com/ . As the data are not persisted, it's reset when the dyno goes to sleep.
 
-**Warning**: this piece of code is designed for a specific use case that doesn't require high security bu just a tool for quick and dirty polling on questions after talks. It has not been tested at scale, and its security setup is quite minimal.
+**Warning**: this piece of code is designed for a specific use case that doesn't require high security but just a tool for quick (and dirty) polling on questions after talks. It has not been tested at scale, and its security setup is quite minimal.
 
 ## Usage
 
