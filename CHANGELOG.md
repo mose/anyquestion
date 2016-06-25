@@ -1,6 +1,8 @@
 AnyQuestion Changelog
 =========================
 
+### v0.1.6 - wip
+
 ### v0.1.5 - 2016-06-26
 - add autologged config param for easing up development
 - add html escape for questions
