@@ -1,9 +1,11 @@
 AnyQuestion Changelog
 =========================
 
-### v0.1.5 - wip
+### v0.1.5 - 2016-06-26
 - add autologged config param for easing up development
 - add html escape for questions
+- rename 'room' by 'talk'
+- begin to add some tests
 
 ### v0.1.4 - 2016-06-25
 - import/export saves and restores all the rooms
