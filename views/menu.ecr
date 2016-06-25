@@ -5,7 +5,9 @@
 <a href="/clean">Clean</a>
 <a href="/export">Export</a>
 <a href="/import">Import</a>
+<% if config.autologged == "false" %>
 <a href="/logout">Out</a>
+<% end %>
 <% else %>
 <a href="/login" class="login">In</a>
 <% end %>
