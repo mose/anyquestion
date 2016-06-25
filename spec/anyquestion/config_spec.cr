@@ -2,12 +2,12 @@ require "../spec_helper"
 require "../../src/anyquestion/config"
 
 describe Anyquestion::Config do
-  it "creates a config object" do
+  it "creates a config object from YAML string" do
     configfile = File.expand_path("#{__DIR__}/../files/config.yml")
     config = Anyquestion::Config.from_yaml File.read(configfile)
     config.public_folder.should eq("spec_public")
   end
-  it "applies default values when invalid config file is provided" do
+  it "applies default values when random YAML is provided" do
     config = Anyquestion::Config.from_yaml "x: a"
     config.public_folder.should eq("public")
   end
