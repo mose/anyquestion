@@ -3,7 +3,15 @@ require "./config"
 module Anyquestion
   class Configuration
     def self.load
-      Anyquestion::Config.from_yaml(self.config_path).override_with_env
+      Anyquestion::Config.from_yaml(self.config_content self.config_path).override_with_env
+    end
+
+    def self.config_content(configfile)
+      if File.exists? configfile
+        File.read configfile
+      else
+        "nothing: here"
+      end
     end
 
     def self.config_path
@@ -12,14 +20,10 @@ module Anyquestion
       else
         configfile = File.expand_path("#{__DIR__}/../../config/config.yml")
         distfile = File.expand_path("#{__DIR__}/../../config/config.dist.yml")
-        unless File.exists?(configfile) || !File.exists?(distfile)
+        if !File.exists?(configfile) && File.exists?(distfile)
           configfile = File.expand_path("#{__DIR__}/../../config/config.dist.yml")
         end
-        if File.exists?(configfile)
-          File.read configfile
-        else
-          "nothing: here"
-        end
+        configfile
       end
     end
   end

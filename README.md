@@ -1,5 +1,8 @@
 # AnyQuestion
 
+[![Build Status](https://img.shields.io/travis/mose/anyquestion.svg)](https://travis-ci.org/mose/anyquestion)
+
+
 This is a web app for managing the step "Do you have any question?" that happens at the end of a talk. It's inspired by a feature present in [Daskit](https://www.daskit.com/) which is not open source (yet?). Every talk has a room, people ask questions there and vote on other people questions. Then it gets easy for the speaker to select the question with the more weight.
 
 There is a test install on http://anyquestion.herokuapp.com/ . As the data are not persisted, it's reset when the dyno goes to sleep.
