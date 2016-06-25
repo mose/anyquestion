@@ -1,0 +1,8 @@
+---
+public_folder: public
+css_file: css/site.css
+# css_file: css/site_clear.css
+anon_create: "false"
+password: xxx
+session_name: aq_id
+autologged: "true"

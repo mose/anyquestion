@@ -1,6 +1,4 @@
 require "spec"
-require "../src/anyquestion"
-
 require "http"
 
 def http_request(method, endpoint)
