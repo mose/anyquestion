@@ -16,5 +16,12 @@ describe Anyquestion::Configuration do
         File.rename moved, config
       end
     end
+    it "gets an alternative location from ENV" do
+      expected = File.expand_path "spec/files/config.yml"
+      ENV["AQ_CONFIG"] = expected
+      path = Anyquestion::Configuration.config_path
+      path.should eq expected
+      ENV.delete "AQ_CONFIG"
+    end
   end
 end
