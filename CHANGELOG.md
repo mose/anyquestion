@@ -1,7 +1,7 @@
 AnyQuestion Changelog
 =========================
 
-### v0.1.4 - wip
+### v0.1.4 - 2016-06-25
 - import/export saves and restores all the rooms
 
 ### v0.1.3 - 2016-06-25
