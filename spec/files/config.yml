@@ -1,5 +1,5 @@
 ---
-public_folder: public
+public_folder: spec_public
 css_file: css/site.css
 # css_file: css/site_clear.css
 anon_create: "false"
