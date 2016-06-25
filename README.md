@@ -48,9 +48,10 @@ Check the [CHANGELOG.md](CHANGELOG.md) file for details.
 - <s>add a config file/env vars system</s>
 - <s>add an admin account for editing things and cleaning up (oauth2 to github probably)</s>
 - <s>consider an admin action to dump existing set of questions in case of restart (export/import)</s>
-- make a debian package (and redhat maybe, see https://github.com/waghanza/plunder)
-- use fibers (`spawn`) to handle websockets maybe
+- add some damn tests
 - expose some api endpoints for plugging irc/slack bots into this
+- use fibers (`spawn`) to handle websockets maybe
+- make a debian package (and redhat maybe, see https://github.com/waghanza/plunder)
 - check responsivity
 
 
