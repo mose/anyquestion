@@ -14,7 +14,20 @@ module Anyquestion
       @time_start = Time.now
       @id = Time.new.epoch + Random.new.rand(1000)
       @questions = {} of Int64 => Question
-      @sockets = [] of HTTP::WebSocket
+    end
+
+    JSON.mapping({
+      name:       String,
+      time_start: {
+        type:      Time,
+        converter: Time::EpochConverter,
+      },
+      id:        Int64,
+      questions: Hash(Int64, Question),
+    })
+
+    def sockets
+      @sockets ||= [] of HTTP::WebSocket
     end
 
     def nb_questions
@@ -22,11 +35,11 @@ module Anyquestion
     end
 
     def nb_users
-      @sockets.size
+      sockets.size
     end
 
     def handle(socket)
-      @sockets.push socket
+      sockets.push socket
 
       socket.send questions_in_order
 
@@ -45,17 +58,17 @@ module Anyquestion
             @questions[question.id] = question
           end
         end
-        @sockets.each do |s|
+        sockets.each do |s|
           begin
             s.send questions_in_order
           rescue ex
-            @sockets.delete s
+            sockets.delete s
           end
         end
       end
 
       socket.on_close do |socket|
-        @sockets.delete socket
+        sockets.delete socket
       end
     end
 

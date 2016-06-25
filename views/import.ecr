@@ -1,0 +1,8 @@
+<h1>Import</h1>
+
+<% if config.anon_create != "false" || logged %>
+<form action="/import" method="post" class="newroom">
+<textarea name="meat"></textarea>
+<input type="submit" name="submit" value="Create">
+</form>
+<% end %>

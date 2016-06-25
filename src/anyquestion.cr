@@ -121,6 +121,25 @@ get "/room/:id/delete" do |env|
   end
 end
 
+get "/export" do |env|
+  logged = sessions.check?(env, "logged")
+  if logged
+    env.response.content_type = "application/json"
+    registry.to_json
+  else
+    env.redirect "/"
+  end
+end
+
+get "/import" do |env|
+  logged = sessions.check?(env, "logged")
+  if logged
+    env.redirect "/import"
+  else
+    env.redirect "/"
+  end
+end
+
 error 404 do |env|
   logged = sessions.check?(env, "logged")
   in_layout "404"
