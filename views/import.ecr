@@ -4,8 +4,8 @@ Your import string should look like
 {"payload":{"rooms": ... }}
 </pre>
 <% if config.anon_create != "false" || logged %>
-<form action="/import" method="post" class="newroom">
-<textarea name="meat" rows="6"></textarea><br>
+<form action="/import" method="post">
+<textarea name="meat" rows="10" class="wide"></textarea><br>
 <input type="submit" name="submit" value="Import">
 </form>
 <% end %>

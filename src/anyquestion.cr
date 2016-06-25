@@ -125,8 +125,8 @@ end
 get "/export" do |env|
   logged = sessions.check?(env, "logged")
   if logged
-    env.response.content_type = "application/json"
-    {"payload": registry}.to_json
+    export = {"payload": registry}.to_json
+    in_layout "export"
   else
     env.redirect "/"
   end
