@@ -1,22 +1,22 @@
 <h1>Any Question?</h1>
 
 <% if config.anon_create != "false" || logged %>
-<form action="/room" method="post" class="newroom">
-New room 
+<form action="/talk" method="post" class="newroom">
+New talk 
 <input type="text" name="name">
 <input type="submit" name="submit" value="Create">
 </form>
 <% end %>
 
-<% if registry.rooms.empty? %>
-  No room created yet.
+<% if registry.talks.empty? %>
+  No talk created yet.
 <% else %>
-  <% registry.rooms.each do |i,room| %>
+  <% registry.talks.each do |i,talk| %>
   <div class="registry">
-  <b><a href="/room/<%= room.id %>"><%= room.name %></a></b>
+  <b><a href="/talk/<%= talk.id %>"><%= talk.name %></a></b>
   <span class="smaller">
-  (<%=room.nb_users %> users)
-  (<%=room.nb_questions %> questions)
+  (<%=talk.nb_users %> users)
+  (<%=talk.nb_questions %> questions)
   </span>
   </div>
   <% end %>

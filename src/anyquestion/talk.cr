@@ -1,5 +1,5 @@
 module Anyquestion
-  class Room
+  class Talk
     @id : Int64
     @name : String
     @time_start : Time

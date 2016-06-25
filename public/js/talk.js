@@ -18,10 +18,10 @@ var User = function(){
 
 var Server = function(){
   var ws_protocol = location.protocol == "https:" ? 'wss' : 'ws';
-  return new WebSocket(`${ws_protocol}://${location.hostname}:${location.port}/ws?room=${location.pathname.split('/').reverse()[0]}`);
+  return new WebSocket(`${ws_protocol}://${location.hostname}:${location.port}/ws?talk=${location.pathname.split('/').reverse()[0]}`);
 }
 
-var Room = React.createClass({
+var Talk = React.createClass({
 
   getInitialState: function () {
     return {
@@ -106,4 +106,4 @@ var Room = React.createClass({
   }
 });
 
-ReactDOM.render(React.createElement(Room, null), document.getElementById('room'));
+ReactDOM.render(React.createElement(Talk, null), document.getElementById('talk'));

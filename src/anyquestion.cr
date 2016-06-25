@@ -22,25 +22,25 @@ get "/help" do |env|
   in_layout "help"
 end
 
-post "/room" do |env|
+post "/talk" do |env|
   logged = sessions.check?(env, "logged")
   if config.anon_create != "false" || logged
     name = env.params.body["name"]
-    room = Anyquestion::Room.new(HTML.escape name)
-    registry.add room
-    env.redirect "/room/#{room.id}"
+    talk = Anyquestion::Talk.new(HTML.escape name)
+    registry.add talk
+    env.redirect "/talk/#{talk.id}"
   else
     env.redirect "/"
   end
 end
 
-get "/room/:id" do |env|
+get "/talk/:id" do |env|
   logged = sessions.check?(env, "logged")
   begin
     id = env.params.url["id"]
-    if registry.rooms[id]?
-      room = registry.rooms[id]
-      render "views/room.ecr"
+    if registry.talks[id]?
+      talk = registry.talks[id]
+      render "views/talk.ecr"
     else
       env.response.status_code = 404
     end
@@ -51,10 +51,10 @@ end
 
 ws "/ws" do |socket, env|
   begin
-    id = env.params.query["room"]
-    if registry.rooms[id]?
-      room = registry.rooms[id]
-      room.handle socket
+    id = env.params.query["talk"]
+    if registry.talks[id]?
+      talk = registry.talks[id]
+      talk.handle socket
     else
       env.response.status_code = 404
     end
@@ -97,10 +97,10 @@ get "/question/:rid/:qid/delete" do |env|
   logged = sessions.check?(env, "logged")
   if logged
     rid = env.params.url["rid"]
-    if registry.rooms[rid]?
-      room = registry.rooms[rid]
+    if registry.talks[rid]?
+      talk = registry.talks[rid]
       qid = env.params.url["qid"]
-      room.questions.delete qid
+      talk.questions.delete qid
     end
     env.redirect "/clean"
   else
@@ -108,13 +108,13 @@ get "/question/:rid/:qid/delete" do |env|
   end
 end
 
-get "/room/:id/delete" do |env|
+get "/talk/:id/delete" do |env|
   logged = sessions.check?(env, "logged")
   if logged
     id = env.params.url["id"]
-    if registry.rooms[id]?
-      room = registry.rooms[id]
-      registry.rooms.delete id
+    if registry.talks[id]?
+      talk = registry.talks[id]
+      registry.talks.delete id
     end
     env.redirect "/clean"
   else

@@ -1,27 +1,27 @@
 <h1>Clean things</h1>
 
-<form action="/room" method="post" class="newroom">
-New room 
+<form action="/talk" method="post" class="newroom">
+New talk 
 <input type="text" name="name">
 <input type="submit" name="submit" value="Create">
 </form>
-<% if registry.rooms.empty? %>
-  No room created yet.
+<% if registry.talks.empty? %>
+  No talk created yet.
 <% else %>
-  <% registry.rooms.each do |i,room| %>
+  <% registry.talks.each do |i,talk| %>
   <div class="registry">
-  <a href="/room/<%= room.id %>/delete">DEL</a>
+  <a href="/talk/<%= talk.id %>/delete">DEL</a>
   -
-  <tt><%= room.id %></tt>
-  <b><a href="/room/<%= room.id %>"><%= room.name %></a></b>
+  <tt><%= talk.id %></tt>
+  <b><a href="/talk/<%= talk.id %>"><%= talk.name %></a></b>
   <span class="smaller">
-  (<%=room.nb_users %> users)
-  (<%=room.nb_questions %> questions)
+  (<%=talk.nb_users %> users)
+  (<%=talk.nb_questions %> questions)
   </span>
   </div>
-  <% room.questions.each do |i, question| %>
+  <% talk.questions.each do |i, question| %>
   <div class="question">
-    <a href="/question/<%= room.id %>/<%= i %>/delete">DEL</a>
+    <a href="/question/<%= talk.id %>/<%= i %>/delete">DEL</a>
     <%= question.voters.size %> - 
     <%= question.name %>
   </div>

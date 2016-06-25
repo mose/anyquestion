@@ -1,24 +1,24 @@
 module Anyquestion
   class Registry
-    @rooms = {} of String => Room
-    getter :rooms
+    @talks = {} of String => Talk
+    getter :talks
 
     JSON.mapping({
-      rooms: Hash(String, Room),
+      talks: Hash(String, Talk),
     })
 
     def initialize
     end
 
-    def add(room : Room)
-      # TODO check if rooms already exists
-      unless @rooms[room.id]?
-        @rooms[room.id.to_s] = room
+    def add(talk : Talk)
+      # TODO check if talks already exists
+      unless @talks[talk.id]?
+        @talks[talk.id.to_s] = talk
       end
     end
 
-    def remove(room : Room)
-      @rooms.delete room.id
+    def remove(talk : Talk)
+      @talks.delete talk.id
     end
   end
 end
