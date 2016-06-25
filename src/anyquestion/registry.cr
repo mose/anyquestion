@@ -1,6 +1,5 @@
 module Anyquestion
   class Registry
-    @talks = {} of String => Talk
     getter :talks
 
     JSON.mapping({
@@ -8,6 +7,7 @@ module Anyquestion
     })
 
     def initialize
+      @talks = {} of String => Talk
     end
 
     def add(talk : Talk)
