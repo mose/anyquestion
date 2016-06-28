@@ -6,7 +6,7 @@ module Anyquestion
     @name : String
     @answered : Bool
 
-    getter :name, :id
+    getter :name, :id, :answered
 
     JSON.mapping({
       name:     String,
