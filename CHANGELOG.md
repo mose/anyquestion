@@ -4,6 +4,7 @@ AnyQuestion Changelog
 ### v0.1.6 - wip
 - link with travis
 - write more tests
+- upgrade kemal to 0.14.0
 
 ### v0.1.5 - 2016-06-26
 - add autologged config param for easing up development
